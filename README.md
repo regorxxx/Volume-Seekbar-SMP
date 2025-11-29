@@ -5,7 +5,7 @@
 ![GitHub](https://img.shields.io/github/license/regorxxx/Volume-Seekbar-SMP)  
 Volume bar and seekbar for [foobar2000](https://www.foobar2000.org/) and [Spider Monkey Panel](https://theqwertiest.github.io/foo_spider_monkey_panel/)/[JSplitter](https://foobar2000.ru/forum/viewtopic.php?t=6378), with theme support and custom actions. 
 
-<img width="563" height="134" alt="{D879AF36-79F8-42DD-8082-FD35799C9E08}" src="https://github.com/user-attachments/assets/5cb58b68-3d57-415e-bd92-0e10b0436a82" />
+![volume](https://github.com/user-attachments/assets/9332e102-5772-4e7a-b24d-298073ab2972)
 
 ## Features
 - Drag + L. Click to set volume (volume bar) or time (seekbar).
@@ -31,9 +31,11 @@ Volume bar and seekbar for [foobar2000](https://www.foobar2000.org/) and [Spider
 See [Wiki](../../wiki/Installation) or the [_INSTALLATION (txt)](../blob/main/_INSTALLATION.txt).
 Not properly following the installation instructions will result in scripts not working as intended. Please don't report errors before checking this.
 
+<img width="563" height="134" alt="{D879AF36-79F8-42DD-8082-FD35799C9E08}" src="https://github.com/user-attachments/assets/5cb58b68-3d57-415e-bd92-0e10b0436a82" />
+
 ## Support
  1. [Issues tracker](../../issues).
- 2. [Hydrogenaudio forum](https://hydrogenaud.io/index.php/topic,125040.0.html).
+ 2. [Hydrogenaudio forum]().
  3. [Wiki](../../wiki).
 
 ## Nightly releases
