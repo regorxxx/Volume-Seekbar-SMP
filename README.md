@@ -1,2 +1,43 @@
 # Volume-Seekbar-SMP
-Volume bar and seekbar for foobar2000, using Spider Monkey, with theming support. 
+[![version][version_badge]][changelog]
+[![CodeFactor][codefactor_badge]](https://www.codefactor.io/repository/github/regorxxx/Volume-Seekbar-SMP/overview/main)
+[![CodacyBadge][codacy_badge]](https://www.codacy.com/gh/regorxxx/Volume-Seekbar-SMP/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=regorxxx/Volume-Seekbar-SMP&amp;utm_campaign=Badge_Grade)
+![GitHub](https://img.shields.io/github/license/regorxxx/Volume-Seekbar-SMP)  
+Volume bar and seekbar for [foobar2000](https://www.foobar2000.org/) and [Spider Monkey Panel](https://theqwertiest.github.io/foo_spider_monkey_panel/)/[JSplitter](https://foobar2000.ru/forum/viewtopic.php?t=6378), with theme support and custom actions. 
+
+![tl_ui](https://github.com/regorxxx/Timeline-SMP/assets/83307074/aad0ffe8-578d-4b97-8ef5-a393a5cb5057)
+
+## Features
+- Drag + L. Click to set volume (volume bar) or time (seekbar).
+- Double L. Click on button to mute\set full volume (volume bar).
+- Double L. Click on button to restart\skip playback (seekbar).
+- Vertical and horizontal mouse wheel scrolling.
+- Configurable layout, buttons, actions and colors using R. Click menu.
+- Elements may be disabled removing color or setting size to 0.
+- Tool-tip shows info about actions or elements.
+- Fully Wine - Unix - non IE SOs compatible.
+- Automatically check for updates (configurable).
+
+![tl](https://github.com/regorxxx/Timeline-SMP/assets/83307074/f7c3f202-9462-4726-a6f8-50c4710495c7)
+
+## Requirements (only one host component required)
+ 1. [Spider Monkey Panel](https://theqwertiest.github.io/foo_spider_monkey_panel): JavaScript host component required to install this. Only x32. **(host component)**
+ 2. [JSplitter](https://foobar2000.ru/forum/viewtopic.php?t=6378): JavaScript host component required to install this. Both x32 and x64. **(host component)**
+ 3. [Required fonts](https://github.com/regorxxx/foobar2000-assets/tree/main/Fonts): FontAwesome, Segoe UI, Arial Unicode MS
+
+## Installation
+See [Wiki](../../wiki/Installation) or the [_INSTALLATION (txt)](../blob/main/_INSTALLATION.txt).
+Not properly following the installation instructions will result in scripts not working as intended. Please don't report errors before checking this.
+
+## Support
+ 1. [Issues tracker](../../issues).
+ 2. [Hydrogenaudio forum](https://hydrogenaud.io/index.php/topic,125040.0.html).
+ 3. [Wiki](../../wiki).
+
+## Nightly releases
+Automatic package [built from GitHub](https://nightly.link/regorxxx/Volume-Seekbar-SMP/workflows/build/main/file.zip) (using the latest commit). Unzip 'file.zip' downloaded and load the '*-package.zip' inside as package within your JS host component.
+
+[changelog]: CHANGELOG.md
+[version_badge]: https://img.shields.io/github/release/regorxxx/Volume-Seekbar-SMP.svg
+[codacy_badge]: https://api.codacy.com/project/badge/Grade/e04be28637dd40d99fae7bd92f740677
+[codefactor_badge]: https://www.codefactor.io/repository/github/regorxxx/Volume-Seekbar-SMP/badge/main
