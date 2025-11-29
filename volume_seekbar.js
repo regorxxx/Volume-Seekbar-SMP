@@ -1,5 +1,5 @@
 'use strict';
-//25/11/2025
+//29/11/2025
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.0.0' }); }
 
@@ -90,7 +90,7 @@ const volumeCallbacks = {
 				case 'max': tooltip.SetValue('Max volume'); break;
 				case 'increase': tooltip.SetValue('Volume up'); break;
 				case 'decrease': tooltip.SetValue('Volume down'); break;
-				case 'display': tooltip.SetValueDe('Current volume\n\nClick to ' + (fb.Volume === -100 ? 'un' : '') + 'mute'); break;
+				case 'display': tooltip.SetValue('Current volume\n\nClick to ' + (fb.Volume === -100 ? 'un' : '') + 'mute'); break;
 				case 'custom': tooltip.SetValue((fb.Volume === -100 ? 'Unmute' : 'Mute')); break;
 			}
 		} else if (dragLin === null || dragLog === null) {
