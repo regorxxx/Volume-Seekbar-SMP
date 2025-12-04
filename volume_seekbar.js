@@ -1,5 +1,5 @@
 'use strict';
-//29/11/2025
+//04/12/2025
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.0.0' }); }
 
@@ -146,7 +146,8 @@ const seekCallbacks = {
 				case 'display':
 				case 'displaycurrent': tooltip.SetValue('Current playback time\n(Click to seek)'); break;
 				case 'displaytotal': tooltip.SetValue('Total playback length\n(Click to seek)'); break;
-				case 'displayleft': tooltip.SetValue('Left playback time\n(Click to seek)'); break;
+				case 'displayleft':
+				case 'displayleftminus': tooltip.SetValue('Left playback time\n(Click to seek)'); break;
 				case 'displaycurrenttotal': tooltip.SetValue('Playback time\\Total length\n(Click to seek)'); break;
 				case 'custom': tooltip.SetValue('Prev. track'); break;
 			}
@@ -182,7 +183,7 @@ const seekCallbacks = {
 			case 'display':
 			case 'displaycurrent': return [utils.FormatDuration(fb.PlaybackTime), 11 / 10, minW];
 			case 'displaytotal': return [total, 11 / 10, minW];
-			case 'displayleft': return [utils.FormatDuration(fb.PlaybackLength - fb.PlaybackTime), 11 / 10, minW];
+			case 'displayleftminus': return [(style === 'displayleftminus' ? '-' : '') + utils.FormatDuration(fb.PlaybackLength - fb.PlaybackTime), 11 / 10, minW];
 			case 'displaycurrenttotal': return [utils.FormatDuration(fb.PlaybackTime) + '\\' + total, 11 / 10, minW * 2];
 		}
 		return [];

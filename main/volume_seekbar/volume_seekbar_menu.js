@@ -118,6 +118,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 				{ entryText: wheel.mode === 'volume' ? 'Mute' : 'Prev. track', val: 'custom' },
 				{ entryText: 'Display (current)', val: 'displaycurrent' },
 				{ entryText: 'Display (left)', val: 'displayleft', flags: wheel.mode === 'volume' ? MF_GRAYED : MF_STRING },
+				{ entryText: 'Display (-left)', val: 'displayleftminus', flags: wheel.mode === 'volume' ? MF_GRAYED : MF_STRING },
 				{ entryText: 'Display (total)', val: 'displaytotal', flags: wheel.mode === 'volume' ? MF_GRAYED : MF_STRING },
 				{ entryText: 'Display (current/total)', val: 'displaycurrenttotal', flags: wheel.mode === 'volume' ? MF_GRAYED : MF_STRING }
 			];

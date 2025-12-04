@@ -6,6 +6,7 @@
 
 ## [Unreleased][]
 ### Added
+- UI: added negative variant of playback time left for seekbar mode at right button. i.e. -x:xx instead of x:xx.
 ### Changed
 ### Removed
 ### Fixed

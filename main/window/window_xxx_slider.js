@@ -1,5 +1,5 @@
 'use strict';
-//25/11/25
+//04/12/25
 
 /* exported _slider */
 
@@ -560,7 +560,8 @@ function _slider({
 				case 'display':
 				case 'displaycurrent': icon = this.current.toFixed(2); break;
 				case 'displaytotal': icon = this.current.toFixed(2); break;
-				case 'displayleft': icon = (1 - this.current).toFixed(2); break;
+				case 'displayleft':
+				case 'displayleftminus': icon = (style === 'displayleftminus' ? '-' : '') +  (1 - this.current).toFixed(2); break;
 				case 'displaycurrenttotal': icon = this.current.toFixed(2) + '\\' + '1.00'; break;
 				case 'none':
 				default:
@@ -1050,6 +1051,7 @@ function _slider({
 			case 'displaycurrent':
 			case 'displaytotal':
 			case 'displayleft':
+			case 'displayleftminus':
 			case 'displaycurrenttotal':
 				this.callbacks.displayButton && this.callbacks.displayButton.call(this, this.current, style); break;
 			case 'none':
@@ -1192,7 +1194,7 @@ function _slider({
 	/** @type {callbacks} - Panel callbacks*/
 	this.callbacks = callbacks;
 	/**
-	 * @typedef {'none'|'decrease'|'increase'|'min'|'max'|'display'|'displaycurrent'|'displaytotal'|'displayleft'|'displaycurrenttotal'|'custom'} buttonStyle
+	 * @typedef {'none'|'decrease'|'increase'|'min'|'max'|'display'|'displaycurrent'|'displaytotal'|'displayleft'|'displayleftminus'|'displaycurrenttotal'|'custom'} buttonStyle
 	 */
 	/**
 	 * @typedef {object} style
