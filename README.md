@@ -21,10 +21,8 @@ Volume bar and seekbar for [foobar2000](https://www.foobar2000.org/) and [Spider
 <img width="563" height="36" alt="{E5115F8A-2CEF-4006-B99F-0E233FE43A7A}" src="https://github.com/user-attachments/assets/0e196853-632e-4696-95a4-39a477b24b85" />
 
 ## Requirements (only one host component required)
- 1. [Spider Monkey Panel (foobar2000 v2.x)](hydrogenaudio.org/index.php/topic,116669.new.html#new): JavaScript host component required to install this. Both [x86](https://github.com/marc2k3/spider-monkey-panel-x86) and [x64](https://github.com/marc2k3/spider-monkey-panel-x64). **(host component)**
- 2. [Spider Monkey Panel (foobar2000 v1.6.x)](https://theqwertiest.github.io/foo_spider_monkey_panel):  JavaScript host component required to install this. Only x86. **(host component)**
- 3. [JSplitter (any foobar2000 version)](https://foobar2000.ru/forum/viewtopic.php?t=6378): JavaScript host component required to install this. Both x86 and x64. **(host component)**
- 4. [Required fonts](https://github.com/regorxxx/foobar2000-assets/tree/main/Fonts): FontAwesome, Segoe UI, Arial Unicode MS
+ 1. [Spider Monkey Panel or JSplitter](../../wiki/SMP-vs-JSplitter-notes): JavaScript host component required to install this. Available in x86 and x64.
+ 2. [Required fonts](https://github.com/regorxxx/foobar2000-assets/tree/main/Fonts): FontAwesome, Segoe UI, Arial Unicode MS
 
 <img width="565" height="37" alt="{13777530-6D8F-4509-8306-CC5AC1FC2DA5}" src="https://github.com/user-attachments/assets/799c7746-ad6b-4a1a-b840-90782ae74c55" />
 
