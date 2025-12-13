@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [1.1.1](#111---2025-12-13
 - [1.1.0](#110---2025-12-12)
 - [1.0.0](#100---2025-11-29)
 
@@ -10,6 +11,13 @@
 ### Changed
 ### Removed
 ### Fixed
+
+## [1.1.1] - 2025-12-13
+### Added
+### Changed
+### Removed
+### Fixed
+- UI: background not being updated on real time if dynamic colors were disabled, which lead to glitches on transparent panels.
 
 ## [1.1.0] - 2025-12-12
 ### Added
@@ -28,6 +36,7 @@
 
 ### Fixed
 
-[Unreleased]: ../../compare/v1.1.0...HEAD
+[Unreleased]: ../../compare/v1.1.1...HEAD
+[1.1.1]: ../../compare/v1.1.0...v1.1.1
 [1.1.0]: ../../compare/v1.0.0...v1.1.0
 [1.0.0]: ../../compare/59f412d...v1.0.0

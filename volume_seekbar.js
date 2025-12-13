@@ -1,7 +1,7 @@
 'use strict';
-//12/12/2025
+//13/12/2025
 
-if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.1.0' }); }
+if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.1.1' }); }
 
 include('helpers\\helpers_xxx.js');
 /* global folders:readable, globSettings:readable, globProfiler:readable, VK_CONTROL:readable, VK_ALT:readable */
@@ -395,28 +395,24 @@ addEventListener('on_playback_seek', () => {
 });
 
 addEventListener('on_selection_changed', () => {
-	if (!properties.bDynamicColors[1]) { return; }
 	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
 });
 
 addEventListener('on_item_focus_change', () => {
-	if (!properties.bDynamicColors[1]) { return; }
 	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
 });
 
 addEventListener('on_playlist_switch', () => {
-	if (!properties.bDynamicColors[1]) { return; }
 	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
 });
 
 addEventListener('on_playlists_changed', () => { // To show/hide loaded playlist indicators...
-	if (!properties.bDynamicColors[1]) { return; }
 	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
@@ -424,13 +420,11 @@ addEventListener('on_playlists_changed', () => { // To show/hide loaded playlist
 
 addEventListener('on_playback_new_track', () => {
 	if (properties.mode[1] === 'seekbar') { slider.change(); }
-	if (!properties.bDynamicColors[1]) { return; }
 	if (background.coverMode.toLowerCase() !== 'none') { background.updateImageBg(); }
 });
 
 addEventListener('on_playback_stop', (reason) => {
 	if (properties.mode[1] === 'seekbar') { slider.change(); }
-	if (!properties.bDynamicColors[1]) { return; }
 	if (reason !== 2) { // Invoked by user or Starting another track
 		if (background.coverMode.toLowerCase() !== 'none' && background.coverModeOptions.bNowPlaying) { background.updateImageBg(); }
 	}
