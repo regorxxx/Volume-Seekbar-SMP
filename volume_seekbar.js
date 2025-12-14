@@ -1,5 +1,5 @@
 'use strict';
-//13/12/2025
+//14/12/2025
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.1.1' }); }
 
@@ -223,10 +223,11 @@ const background = new _background({
 				const { main, sec, note } = dynamicColors(
 					colArray,
 					slider.colors.background !== -1 ? slider.colors.background : background.getColors()[0],
-					slider.style.bar === 'roundedgradient'
+					true
 				);
-				if (slider.colors.left !== -1) { slider.colors.left = main; }
-				if (slider.colors.right !== -1) { slider.colors.right = sec; }
+				const bSwap = slider.style.bar.toLowerCase() !== 'roundedgradient';
+				if (slider.colors.left !== -1) { slider.colors.left = bSwap ? sec : main; }
+				if (slider.colors.right !== -1) { slider.colors.right = bSwap ? main : sec; }
 				if (slider.colors.sel !== -1) { slider.colors.sel = note; }
 				if (slider.colors.buttons !== -1) { slider.colors.buttons = note; }
 			} else {

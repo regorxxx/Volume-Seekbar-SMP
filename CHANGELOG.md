@@ -9,8 +9,10 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+- UI: improvements on dynamic colors handling in some extreme cases with main and secondary colors being almost equal.
 ### Removed
 ### Fixed
+- UI: dynamic colors not being reapplied when changing elements' styles immediately.
 
 ## [1.1.1] - 2025-12-13
 ### Added

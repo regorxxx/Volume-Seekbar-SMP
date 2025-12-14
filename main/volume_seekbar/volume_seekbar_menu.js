@@ -1,5 +1,5 @@
 'use strict';
-//25/11/25
+//14/12/25
 
 /* exported createSliderMenu, importSettingsMenu */
 
@@ -102,6 +102,11 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 						properties.style[1] = JSON.stringify(parent.style);
 						overwriteProperties(properties);
 						parent.repaint();
+						if (properties.bDynamicColors[1]) { parentBackground.applyArtColors(true); }
+						else if (properties.bOnNotifyColors[1]) {
+							window.NotifyOthers('Colors: ask color scheme', window.ScriptInfo.Name + ': set color scheme');
+							window.NotifyOthers('Colors: ask colors', window.ScriptInfo.Name + ': set colors');
+						}
 					}
 				});
 			});
