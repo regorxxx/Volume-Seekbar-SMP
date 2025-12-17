@@ -1,5 +1,5 @@
 'use strict';
-//14/12/2025
+//17/12/2025
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.1.1' }); }
 
@@ -16,7 +16,7 @@ include('helpers\\helpers_xxx_prototypes.js');
 include('helpers\\helpers_xxx_prototypes_smp.js');
 /* global extendGR:readable */
 include('helpers\\helpers_xxx_properties.js');
-/* global setProperties:readable, getPropertiesPairs:readable, overwriteProperties:readable, deepAssign:readable */
+/* global setProperties:readable, getPropertiesPairs:readable, overwriteProperties:readable */
 include('helpers\\helpers_xxx_UI.js');
 /* global RGB:readable, _scale:readable, _tt:readable, chars:readable */
 include('main\\volume_seekbar\\volume_seekbar_menu.js');
@@ -39,29 +39,26 @@ let properties = {
 		right: RGB(70, 70, 70),
 		sel: RGB(55, 55, 55),
 		buttons: RGB(200, 200, 200),
-	}), { func: isJSON }],
+	}), { func: isJSON, forceDefaults: true }],
 	style: ['Style', JSON.stringify({
 		bar: 'rounded',
 		selector: 'rounded',
 		leftButton: 'decrease',
 		rightButton: 'increase',
 		shade: 'none'
-	}), { func: isJSON }],
+	}), { func: isJSON, forceDefaults: true }],
 	marginXPerc: ['X-axis margin (% of window width).', 2.5, { func: isFinite, range: [[0, 40]] }],
 	marginYPerc: ['Y-axis margin (% of window width).', 20, { func: isFinite, range: [[0, 40]] }],
 	offsetX: ['X-axis offset (% of window width).', 0, { func: isFinite, range: [[-100, 100]] }],
 	buttonY: ['Y-axis button scale (% of bar height).', 100, { func: isFinite, range: [[0, Infinity]] }],
 	selectorW: ['Slider button width (px)', Math.max(_scale(window.Width / 50), 8), { func: isFinite, range: [[8, Infinity]] }],
-	background: ['Background options', JSON.stringify(deepAssign()(
-		(new _background).defaults(),
-		{ colorMode: 'none', coverMode: 'front', coverModeOptions: { blur: 50, alpha: 0 } }
-	)), { func: isJSON }],
+	background: ['Background options', JSON.stringify(_background.defaults()), { func: isJSON, forceDefaults: true }],
 	bDynamicColors: ['Adjust colors to artwork', true, { func: isBoolean }],
 	wheel: ['Wheel settings', JSON.stringify({
 		unit: 'u',
 		step: 5,
 		bReversed: false
-	}), { func: isJSON }],
+	}), { func: isJSON, forceDefaults: true }],
 	mode: ['Slider mode', 'volume', { func: (val) => ['volume', 'seekbar'].includes(val) }, 'volume'],
 	dblclkSel: ['Double click behavior', 1, { range: [[0, 2]] }, 1],
 	bAutoUpdateCheck: ['Automatically check updates', globSettings.bAutoUpdateCheck, { func: isBoolean }],
