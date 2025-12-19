@@ -16,6 +16,7 @@
 ### Removed
 ### Fixed
 - UI: dynamic colors not being reapplied when changing elements' styles immediately.
+- UI: fixed color-server not replying when third party panels asked for color scheme.
 
 ## [1.1.1] - 2025-12-13
 ### Added

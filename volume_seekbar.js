@@ -1,5 +1,5 @@
 'use strict';
-//17/12/2025
+//19/12/2025
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.1.1' }); }
 
@@ -457,7 +457,7 @@ addEventListener('on_notify_data', (name, info) => {
 			break;
 		}
 		case 'Colors: ask color scheme': {
-			if (info && properties.bOnNotifyColors[1] && background.scheme) {
+			if (info && properties.bNotifyColors[1] && background.scheme) {
 				window.NotifyOthers(String(info), background.scheme);
 			}
 			break;
