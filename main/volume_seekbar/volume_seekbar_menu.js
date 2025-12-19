@@ -1,5 +1,5 @@
 'use strict';
-//14/12/25
+//19/12/25
 
 /* exported createSliderMenu, importSettingsMenu */
 
@@ -201,7 +201,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 				menuName, entryText: opt.entryText + '\t[' + getColorName(parent.colors[opt.key]) + ']', func: () => {
 					if (utils.IsKeyPressed(VK_CONTROL)) {
 						if (opt.key === 'right' && parent.style.bar.toLowerCase() === 'roundedgradient') {
-							fb.ShowPopupMessage('Right color can not be disabled in this bar style.');
+							fb.ShowPopupMessage('Right color can not be disabled in this bar style.', window.ScriptInfo.Name + ': Colors');
 							return;
 						}
 						parent.colors[opt.key] = -1;
@@ -219,8 +219,9 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 			menu.newSeparator(menuName);
 			const subMenu = menu.newMenu('Dynamic colors', menuName);
 			menu.newEntry({
-				menuName: subMenu, entryText: 'Dynamic (background cover mode)', func: () => {
+				menuName: subMenu, entryText: 'Dynamic (background art mode)', func: () => {
 					properties.bDynamicColors[1] = !properties.bDynamicColors[1];
+					if (properties.bDynamicColors[1] && properties.bOnNotifyColors[1]) { fb.ShowPopupMessage('Warning: Dynamic colors (background art mode) and Color-server listening are enabled at the same time.\n\nThis setting may probably produce glitches since 2 color sources are being used, while one tries to override the other.\n\nIt\'s recommended to only use one of these features, unless you know what you are DOMStringList.', window.ScriptInfo.Name + ': Dynamic colors'); }
 					overwriteProperties(properties);
 					if (properties.bDynamicColors[1]) {
 						// Ensure it's applied with compatible settings
@@ -244,10 +245,11 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 			menu.newEntry({
 				menuName: subMenu, entryText: 'Listen to color-servers', func: () => {
 					properties.bOnNotifyColors[1] = !properties.bOnNotifyColors[1];
+					if (properties.bDynamicColors[1] && properties.bOnNotifyColors[1]) { fb.ShowPopupMessage('Warning: Dynamic colors (background art mode) and Color-server listening are enabled at the same time.\n\nThis setting may probably produce glitches since 2 color sources are being used, while one tries to override the other.\n\nIt\'s recommended to only use one of these features, unless you know what you are DOMStringList.', window.ScriptInfo.Name + ': Dynamic colors'); }
 					overwriteProperties(properties);
 					if (properties.bOnNotifyColors[1]) {
-						window.NotifyOthers('Colors: ask color scheme', window.ScriptInfo.Name  + ': set color scheme');
-						window.NotifyOthers('Colors: ask color', window.ScriptInfo.Name  + ': set colors');
+						window.NotifyOthers('Colors: ask color scheme', window.ScriptInfo.Name + ': set color scheme');
+						window.NotifyOthers('Colors: ask color', window.ScriptInfo.Name + ': set colors');
 					}
 				}
 			});
