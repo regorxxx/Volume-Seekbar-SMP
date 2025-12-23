@@ -2,11 +2,18 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [1.2.0](#120---2025-12-23
 - [1.1.1](#111---2025-12-13
 - [1.1.0](#110---2025-12-12)
 - [1.0.0](#100---2025-11-29)
 
 ## [Unreleased][]
+### Added
+### Changed
+### Removed
+### Fixed
+
+## [1.2.0] - 2025-12-23
 ### Added
 - UI: added new setting to background to skip following selection if follow now playing is active.
 - UI: added new setting to background when using art to apply a special circular blur effect instead of an homogeneous blur.
@@ -43,7 +50,8 @@
 
 ### Fixed
 
-[Unreleased]: ../../compare/v1.1.1...HEAD
+[Unreleased]: ../../compare/v1.2.0...HEAD
+[1.2.0]: ../../compare/v1.1.1...v1.2.0
 [1.1.1]: ../../compare/v1.1.0...v1.1.1
 [1.1.0]: ../../compare/v1.0.0...v1.1.0
 [1.0.0]: ../../compare/59f412d...v1.0.0
