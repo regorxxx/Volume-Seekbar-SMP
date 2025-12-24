@@ -1,5 +1,5 @@
 'use strict';
-//19/12/25
+//24/12/25
 
 /* exported createSliderMenu, importSettingsMenu */
 
@@ -292,7 +292,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 					if (utils.IsKeyPressed(VK_CONTROL)) {
 						input = properties[opt.key][3];
 					} else {
-						input = Input.number('real positive', parent[opt.key], 'Enter value:\n(real number >= 0 and < 40)', 'Volume-Seekbar: ' + opt.entryText, 20, [n => n >= 0 && n < 40]);
+						input = Input.number('real positive', parent[opt.key], 'Enter value:\n(real number ≥0 and <40)', 'Volume-Seekbar: ' + opt.entryText, 20, [n => n >= 0 && n < 40]);
 						if (input === null) { return; }
 					}
 					properties[opt.key][1] = parent[opt.key] = input;
@@ -329,7 +329,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 					if (utils.IsKeyPressed(VK_CONTROL)) {
 						input = properties[opt.key][3];
 					} else {
-						input = Input.number('int positive', parent[opt.key], 'Enter value in px:\n(int number >= 8)\n\nSet to 0 to disable it.', 'Volume-Seekbar: Slider button size', 20, [n => n >= 8]);
+						input = Input.number('int positive', parent[opt.key], 'Enter value in px:\n(integer number ≥8)\n\nSet to 0 to disable it.', 'Volume-Seekbar: Slider button size', 20, [n => n >= 8]);
 						if (input === null) { return; }
 					}
 					properties[opt.key][1] = parent[opt.key] = input;
@@ -344,7 +344,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 				if (utils.IsKeyPressed(VK_CONTROL)) {
 					input = properties.buttonY[3];
 				} else {
-					input = Input.number('real', properties.buttonY[1], 'Enter value:\n(real number >= 0)', 'Volume-Seekbar: Y-Axis buttons scale', 100, [n => n >= 0 && n < Infinity]);
+					input = Input.number('real', properties.buttonY[1], 'Enter value:\n(real number ≥0)', 'Volume-Seekbar: Y-Axis buttons scale', 100, [n => n >= 0 && n < Infinity]);
 					if (input === null) { return; }
 				}
 				parent.buttonY = properties.buttonY[1] = input;
