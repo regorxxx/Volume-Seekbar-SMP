@@ -10,6 +10,7 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+- Code cleanup and performance improvements for background code. In particular when art has been set to be invisible for exclusive art colors processing or set to none.
 ### Removed
 ### Fixed
 
