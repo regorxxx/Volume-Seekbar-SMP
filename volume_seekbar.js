@@ -1,10 +1,10 @@
 'use strict';
-//24/12/2025
+//29/12/2025
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.2.0-beta' }); }
 
 include('helpers\\helpers_xxx.js');
-/* global folders:readable, globSettings:readable, globProfiler:readable, VK_CONTROL:readable, VK_ALT:readable */
+/* global folders:readable, globSettings:readable, globProfiler:readable, VK_CONTROL:readable, VK_ALT:readable, VK_SHIFT:readable */
 include('helpers\\helpers_xxx_file.js');
 /* global _open:readable, utf8:readable, _save:readable */
 include('helpers\\helpers_xxx_flags.js');
@@ -209,7 +209,7 @@ const background = new _background({
 	callbacks: {
 		change: function (config, changeArgs, callbackArgs) {
 			if (callbackArgs && callbackArgs.bSaveProperties) {
-				['x', 'y', 'w', 'h', 'callbacks'].forEach((key) => delete config[key]);
+				['x', 'y', 'w', 'h'].forEach((key) => delete config[key]);
 				properties.background[1] = JSON.stringify(config);
 				overwriteProperties(properties);
 			}
@@ -338,21 +338,25 @@ addEventListener('on_mouse_lbtn_dblclk', (x, y) => {
 	slider.lbtn_dblclk(x, y);
 });
 
-addEventListener('on_mouse_move', (x, y) => {
+addEventListener('on_mouse_move', (x, y, mask) => {
 	slider.move(x, y);
+	background.move(x, y, mask);
 });
 
 addEventListener('on_mouse_leave', () => {
 	slider.move(-1, -1);
+	background.leave();
 });
 
-addEventListener('on_mouse_wheel', (s) => {
-	if (utils.IsKeyPressed(VK_CONTROL) && utils.IsKeyPressed(VK_ALT) && slider.wheelResize(s)) {
-		['marginXPerc', 'marginYPerc', 'selectorW', 'buttonY'].forEach((key) => properties[key][1] = slider[key]);
-		overwriteProperties(properties);
-	} else {
-		slider.wheel(s);
-	}
+addEventListener('on_mouse_wheel', (step) => {
+	if (utils.IsKeyPressed(VK_CONTROL) && utils.IsKeyPressed(VK_ALT) && slider.wheelResize(step)) {
+		if (utils.IsKeyPressed(VK_SHIFT)) { background.wheelResize(step, void (0), { bSaveProperties: true }); }
+		else {
+			['marginXPerc', 'marginYPerc', 'selectorW', 'buttonY'].forEach((key) => properties[key][1] = slider[key]);
+			overwriteProperties(properties);
+		}
+	} else if (utils.IsKeyPressed(VK_SHIFT)) { background.cycleArtAsync(step); }
+	else { slider.wheel(step); }
 });
 
 addEventListener('on_mouse_wheel_h', (s) => {
