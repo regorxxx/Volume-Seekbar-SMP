@@ -1,5 +1,5 @@
 'use strict';
-//04/12/25
+//29/12/25
 
 /* exported _slider */
 
@@ -809,7 +809,7 @@ function _slider({
 		return this.style[key + 'Button'] !== 'none' && x >= button.x && x <= (button.x + button.w) && y > button.y && y < (button.y + button.h);
 	};
 	/**
-	 * Called on on_mouse_wheel.
+	 * Called on on_mouse_wheel or on_mouse_wheel_h
 	 * @property
 	 * @name wheel
 	 * @kind method
