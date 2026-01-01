@@ -1,5 +1,5 @@
 'use strict';
-//29/12/25
+//01/01/26
 
 /* exported _slider */
 
@@ -561,7 +561,7 @@ function _slider({
 				case 'displaycurrent': icon = this.current.toFixed(2); break;
 				case 'displaytotal': icon = this.current.toFixed(2); break;
 				case 'displayleft':
-				case 'displayleftminus': icon = (style === 'displayleftminus' ? '-' : '') +  (1 - this.current).toFixed(2); break;
+				case 'displayleftminus': icon = (style === 'displayleftminus' ? '-' : '') + (1 - this.current).toFixed(2); break;
 				case 'displaycurrenttotal': icon = this.current.toFixed(2) + '\\' + '1.00'; break;
 				case 'none':
 				default:
@@ -845,7 +845,7 @@ function _slider({
 			let key, min, max;
 			switch (true) {
 				case this.traceButton(this.mx, this.my, 'left') || this.traceButton(this.mx, this.my, 'right'):
-					key = 'buttonY'; min = 0;  max = Infinity; break;
+					key = 'buttonY'; min = 0; max = Infinity; break;
 				case this.traceSelector(this.mx, this.my):
 					key = 'selectorW'; min = 8; max = Infinity; break;
 				case this.traceBar(this.mx, this.my):
@@ -862,7 +862,7 @@ function _slider({
 				this[key] = Math.max(min, this[key]);
 			}
 			this.resize(this.w, this.h);
-			this.repaint();
+			if (window.IsVisible) { this.repaint(); }
 			return true;
 		}
 		return false;
@@ -928,7 +928,7 @@ function _slider({
 					this.callbacks.tooltip.call(this, null, null, null);
 				}
 			}
-			if (bRepaint) { this.repaint(); }
+			if (bRepaint && window.IsVisible) { this.repaint(); }
 			return true;
 		} else {
 			window.SetCursor(IDC_ARROW);
@@ -939,7 +939,7 @@ function _slider({
 			if (this.isHoverSelector || this.isDrag) {
 				this.isHoverSelector = false;
 				this.isDrag = false;
-				this.repaint();
+				if (window.IsVisible) { this.repaint(); }
 			}
 			return false;
 		}
@@ -966,7 +966,7 @@ function _slider({
 						}, 150);
 					}
 				}, 100);
-				this.repaint();
+				if (window.IsVisible) { this.repaint(); }
 			} else if (this.button.right.hover) {
 				this.button.right.down = true;
 				setTimeout(() => {
@@ -977,7 +977,7 @@ function _slider({
 						}, 150);
 					}
 				}, 100);
-				this.repaint();
+				if (window.IsVisible) { this.repaint(); }
 			} else if (this.traceBar(x, y) || this.traceSelector(x, y)) {
 				this.isDrag = true;
 			}
@@ -1002,17 +1002,17 @@ function _slider({
 			if (this.button.left.hover) {
 				this.executeButton(this.style.leftButton);
 				this.isDrag = false;
-				this.repaint();
+				if (window.IsVisible) { this.repaint(); }
 			} else if (this.button.right.hover) {
 				this.executeButton(this.style.rightButton);
 				this.isDrag = false;
-				this.repaint();
+				if (window.IsVisible) { this.repaint(); }
 			} else if (this.isDrag) {
 				this.isDrag = false;
 				// Allows dragging update outside the panel
 				if (x < 0 || y < 0) { this.isHoverSelector = false; }
 				this.callbacks.lDrag && this.callbacks.lDrag.call(this, this.dragLin, this.dragLog);
-				this.repaint();
+				if (window.IsVisible) { this.repaint(); }
 			}
 			return true;
 		} else {
@@ -1020,7 +1020,7 @@ function _slider({
 				this.isDrag = false;
 				this.button.left.hover = this.button.right.hover = false;
 				this.isHoverSelector = false;
-				this.repaint();
+				if (window.IsVisible) { this.repaint(); }
 			}
 			return false;
 		}
@@ -1118,7 +1118,7 @@ function _slider({
 		} else if (this.callbacks.pos) {
 			this.current = Math.max(0, Math.min(this.callbacks.pos.call(this), 1));
 		}
-		if (bRepaint) { this.repaint(); }
+		if (bRepaint && window.IsVisible) { this.repaint(); }
 	};
 	/**
 	 * Inits panel variables.

@@ -233,7 +233,7 @@ const background = new _background({
 					slider.colors[key] = defColors[key];
 				}
 			}
-			window.Repaint();
+			if (window.IsVisible) { window.Repaint(); }
 		},
 		artColorsNotify: (colArray, bForced = false) => {
 			if (!bForced && !properties.bNotifyColors[1]) { return; }
@@ -276,7 +276,7 @@ slider.shareUiSettings = function (mode = 'popup') {
 
 slider.applyUiSettings = function (settings, bForce) {
 	window.highlight = true;
-	window.Repaint();
+	if (window.IsVisible) { window.Repaint(); }
 	const answer = bForce
 		? popup.yes
 		: WshShell.Popup('Apply current settings to highlighted panel?\nCheck UI.', 0, window.FullPanelName, popup.question + popup.yes_no);
@@ -298,7 +298,7 @@ slider.applyUiSettings = function (settings, bForce) {
 		background.changeConfig({ config: newBg, bRepaint: true, callbackArgs: { bSaveProperties: true } });
 	}
 	window.highlight = false;
-	window.Repaint();
+	if (window.IsVisible) { window.Repaint(); }
 };
 
 globProfiler.Print('slider');
@@ -451,7 +451,7 @@ addEventListener('on_notify_data', (name, info) => {
 				if (slider.colors.right !== -1 && hasColor('right')) { slider.colors.right = getColor('right'); }
 				if (slider.colors.sel !== -1 && hasColor('sel')) { slider.colors.sel = getColor('sel'); }
 				if (slider.colors.buttons !== -1 && hasColor('buttons')) { slider.colors.buttons = getColor('buttons'); }
-				window.Repaint();
+				if (window.IsVisible) { window.Repaint(); }
 			}
 			break;
 		}
