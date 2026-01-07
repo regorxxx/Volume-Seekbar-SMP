@@ -1,5 +1,5 @@
 'use strict';
-//24/12/25
+//07/01/26
 
 /* exported createSliderMenu, importSettingsMenu */
 
@@ -231,12 +231,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 						}
 						parentBackground.updateImageBg(true);
 					} else {
-						const defColors = JSON.parse(properties.colors[1]);
-						for (const key in parent.colors) {
-							parent.colors[key] = defColors[key];
-						}
-						parentBackground.changeConfig({ config: { colorModeOptions: { color: JSON.parse(properties.background[1]).colorModeOptions.color } }, callbackArgs: { bSaveProperties: false } });
-						parent.repaint();
+						parentBackground.callbacks.artColors(void(0), true);
 					}
 				}
 			});
@@ -250,6 +245,8 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 					if (properties.bOnNotifyColors[1]) {
 						window.NotifyOthers('Colors: ask color scheme', window.ScriptInfo.Name + ': set color scheme');
 						window.NotifyOthers('Colors: ask color', window.ScriptInfo.Name + ': set colors');
+					} else if (!properties.bDynamicColors[1]) {
+						parentBackground.callbacks.artColors(void(0), true);
 					}
 				}
 			});

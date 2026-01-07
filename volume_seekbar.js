@@ -1,5 +1,5 @@
 'use strict';
-//29/12/2025
+//07/01/2026
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.2.0-beta' }); }
 
@@ -219,7 +219,7 @@ const background = new _background({
 			else if (colArray) {
 				const { main, sec, note } = dynamicColors(
 					colArray,
-					slider.colors.background !== -1 ? slider.colors.background : background.getColors()[0],
+					slider.colors.background !== -1 ? slider.colors.background : background.getAvgPanelColor(),
 					true
 				);
 				const bSwap = slider.style.bar.toLowerCase() !== 'roundedgradient';
@@ -232,6 +232,7 @@ const background = new _background({
 				for (const key in slider.colors) {
 					slider.colors[key] = defColors[key];
 				}
+				background.changeConfig({ config: { colorModeOptions: { color: JSON.parse(properties.background[1]).colorModeOptions.color } }, callbackArgs: { bSaveProperties: false } });
 			}
 			if (window.IsVisible) { window.Repaint(); }
 		},
@@ -397,38 +398,38 @@ addEventListener('on_playback_seek', () => {
 });
 
 addEventListener('on_selection_changed', () => {
-	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
+	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
 });
 
 addEventListener('on_item_focus_change', () => {
-	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
+	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
 });
 
 addEventListener('on_playlist_switch', () => {
-	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
+	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
 });
 
 addEventListener('on_playlists_changed', () => { // To show/hide loaded playlist indicators...
-	if (background.coverMode.toLowerCase() !== 'none' && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
+	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
 		background.updateImageBg();
 	}
 });
 
 addEventListener('on_playback_new_track', () => {
 	if (properties.mode[1] === 'seekbar') { slider.change(); }
-	if (background.coverMode.toLowerCase() !== 'none') { background.updateImageBg(); }
+	if (background.useCover) { background.updateImageBg(); }
 });
 
 addEventListener('on_playback_stop', (reason) => {
 	if (properties.mode[1] === 'seekbar') { slider.change(); }
 	if (reason !== 2) { // Invoked by user or Starting another track
-		if (background.coverMode.toLowerCase() !== 'none' && background.coverModeOptions.bNowPlaying) { background.updateImageBg(); }
+		if (background.useCover && background.coverModeOptions.bNowPlaying) { background.updateImageBg(); }
 	}
 });
 
@@ -444,7 +445,7 @@ addEventListener('on_notify_data', (name, info) => {
 				const colors = clone(info);
 				const getColor = (key) => Object.hasOwn(colors, key) ? colors.background : colors[['background', 'left', 'right', 'sel', 'buttons'].indexOf(key)];
 				const hasColor = (key) => typeof getColor(key) !== 'undefined';
-				if (background.colorMode !== 'none' && hasColor('background')) {
+				if (background.useColors && hasColor('background')) {
 					background.changeConfig({ config: { colorModeOptions: { color: getColor('background') } }, callbackArgs: { bSaveProperties: false } });
 				}
 				if (slider.colors.left !== -1 && hasColor('left')) { slider.colors.left = getColor('left'); }
