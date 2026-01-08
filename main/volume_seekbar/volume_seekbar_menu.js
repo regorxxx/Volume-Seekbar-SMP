@@ -1,5 +1,5 @@
 'use strict';
-//07/01/26
+//08/01/26
 
 /* exported createSliderMenu, importSettingsMenu */
 
@@ -220,22 +220,24 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 			const subMenu = menu.newMenu('Dynamic colors', menuName);
 			menu.newEntry({
 				menuName: subMenu, entryText: 'Dynamic (background art mode)', func: () => {
-					properties.bDynamicColors[1] = !properties.bDynamicColors[1];
+					properties.bDynamicColors[1] = !(properties.bDynamicColors[1] && parentBackground.useCoverColors);
 					if (properties.bDynamicColors[1] && properties.bOnNotifyColors[1]) { fb.ShowPopupMessage('Warning: Dynamic colors (background art mode) and Color-server listening are enabled at the same time.\n\nThis setting may probably produce glitches since 2 color sources are being used, while one tries to override the other.\n\nIt\'s recommended to only use one of these features, unless you know what you are doing.', window.ScriptInfo.Name + ': Dynamic colors'); }
 					overwriteProperties(properties);
 					if (properties.bDynamicColors[1]) {
 						// Ensure it's applied with compatible settings
-						parentBackground.changeConfig({ config: { coverModeOptions: { bProcessColors: true } }, callbackArgs: { bSaveProperties: true } });
-						if (parentBackground.coverMode === 'none') {
-							parentBackground.changeConfig({ config: { coverMode: 'front', coverModeOptions: { alpha: 0 } }, callbackArgs: { bSaveProperties: true } });
-						}
+						parentBackground.changeConfig({
+							bRepaint: false, callbackArgs: { bSaveProperties: true },
+							config: !parentBackground.useCover
+								? { coverMode: parentBackground.getDefaultCoverMode(), coverModeOptions: { alpha: 0, bProcessColors: true } }
+								: { coverModeOptions: { bProcessColors: true } },
+						});
 						parentBackground.updateImageBg(true);
 					} else {
 						parentBackground.callbacks.artColors(void (0), true);
 					}
-				}
+				},
+				checkFunc: () => properties.bDynamicColors[1] && parentBackground.useCoverColors,
 			});
-			menu.newCheckMenuLast(() => properties.bDynamicColors[1]);
 			menu.newSeparator(subMenu);
 			menu.newEntry({
 				menuName: subMenu, entryText: 'Listen to color-servers', func: () => {
@@ -253,14 +255,22 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 			menu.newCheckMenuLast(() => properties.bOnNotifyColors[1]);
 			menu.newEntry({
 				menuName: subMenu, entryText: 'Act as color-server', func: () => {
-					properties.bNotifyColors[1] = !properties.bNotifyColors[1];
-					overwriteProperties(properties);
-					if (properties.bNotifyColors[1] && parentBackground.scheme) {
-						window.NotifyOthers('Colors: set color scheme', parentBackground.scheme);
+					properties.bNotifyColors[1] = !(properties.bNotifyColors[1] && parentBackground.useCoverColors);
+					this.saveProperties();
+					if (properties.bNotifyColors[1]) {
+						if (parentBackground.scheme) { window.NotifyOthers('Colors: set color scheme', parentBackground.scheme); }
+						else if (!parentBackground.useCoverColors) {
+							parentBackground.changeConfig({
+								bRepaint: false, callbackArgs: { bSaveProperties: true },
+								config: !parentBackground.useCover
+									? { coverMode: parentBackground.getDefaultCoverMode(), coverModeOptions: { alpha: 0, bProcessColors: true } }
+									: { coverModeOptions: { bProcessColors: true } },
+							});
+						}
 					}
-				}
+				},
+				checkFunc: () => properties.bNotifyColors[1] && parentBackground.useCoverColors
 			});
-			menu.newCheckMenuLast(() => properties.bNotifyColors[1]);
 		}
 		menu.newSeparator(menuName);
 		menu.newEntry({

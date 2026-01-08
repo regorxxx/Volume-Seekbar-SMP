@@ -17,8 +17,9 @@
 - UI: added new background setting to prefer placement of dark colors at the outer edge of the panel in bigradient color mode.
 - UI: added new background setting for art reflection effects. Only available when crop setting is set to none.
 - UI: added new background setting for basic art manipulation.
+- UI: added DUI/CUI color settings for background, which are applied on the color mode used.
 ### Changed
-- UI: reworked background submenu.
+- UI: cleanup and rework of background submenu and its integration with other settings.
 - UI: 'Folder' and 'Path' art modes on background now support TF expressions.
 - UI: improvements on dynamic colors handling related to background color identification (mixing the art, color settings, etc.).
 - Code cleanup and performance improvements for background code. In particular when art has been set to be invisible for exclusive art colors processing or set to none.

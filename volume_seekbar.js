@@ -1,5 +1,5 @@
 'use strict';
-//07/01/2026
+//08/01/2026
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.2.0-beta' }); }
 
@@ -320,6 +320,29 @@ if (properties.bAutoUpdateCheck[1]) {
 	setTimeout(checkUpdate, 120000, { bDownload: globSettings.bAutoUpdateDownload, bOpenWeb: globSettings.bAutoUpdateOpenWeb });
 }
 
+{
+	const callback = () => {
+		if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
+			background.updateImageBg();
+		}
+	};
+	['on_item_focus_change', 'on_selection_changed', 'on_playlists_changed', 'on_playlist_items_added', 'on_playlist_items_removed', 'on_playlist_switch'].forEach((e) => addEventListener(e, callback));
+
+	addEventListener('on_playback_stop', (reason) => {
+		if (reason !== 2) { // Invoked by user or Starting another track
+			if (background.useCover && background.coverModeOptions.bNowPlaying) { background.updateImageBg(); }
+		}
+	});
+
+	addEventListener('on_playback_new_track', () => {
+		if (background.useCover) { background.updateImageBg(); }
+	});
+
+	addEventListener('on_colours_changed', () => {
+		background.colorsChanged();
+	});
+}
+
 addEventListener('on_mouse_lbtn_down', (x, y) => {
 	slider.lbtn_down(x, y);
 });
@@ -385,53 +408,10 @@ addEventListener('on_volume_change', () => {
 	if (properties.mode[1] === 'volume') { slider.change(); }
 });
 
-addEventListener('on_playback_time', () => {
-	if (properties.mode[1] === 'seekbar') { slider.change(); }
-});
-
-addEventListener('on_playback_pause', () => {
-	if (properties.mode[1] === 'seekbar') { slider.change(); }
-});
-
-addEventListener('on_playback_seek', () => {
-	if (properties.mode[1] === 'seekbar') { slider.change(); }
-});
-
-addEventListener('on_selection_changed', () => {
-	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
-		background.updateImageBg();
-	}
-});
-
-addEventListener('on_item_focus_change', () => {
-	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
-		background.updateImageBg();
-	}
-});
-
-addEventListener('on_playlist_switch', () => {
-	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
-		background.updateImageBg();
-	}
-});
-
-addEventListener('on_playlists_changed', () => { // To show/hide loaded playlist indicators...
-	if (background.useCover && (!background.coverModeOptions.bNowPlaying || !fb.IsPlaying)) {
-		background.updateImageBg();
-	}
-});
-
-addEventListener('on_playback_new_track', () => {
-	if (properties.mode[1] === 'seekbar') { slider.change(); }
-	if (background.useCover) { background.updateImageBg(); }
-});
-
-addEventListener('on_playback_stop', (reason) => {
-	if (properties.mode[1] === 'seekbar') { slider.change(); }
-	if (reason !== 2) { // Invoked by user or Starting another track
-		if (background.useCover && background.coverModeOptions.bNowPlaying) { background.updateImageBg(); }
-	}
-});
+{
+	const callback = () => { if (properties.mode[1] === 'seekbar') { slider.change(); } };
+	['on_playback_time', 'on_playback_pause', 'on_playback_seek', 'on_playback_new_track', 'on_playback_stop'].forEach((e) => addEventListener(e, callback));
+}
 
 addEventListener('on_notify_data', (name, info) => {
 	if (name === 'bio_imgChange' || name === 'bio_chkTrackRev' || name === 'xxx-scripts: panel name reply') { return; }
