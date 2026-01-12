@@ -2,12 +2,19 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [1.3.0](#130---2026-01-12
 - [1.2.0](#120---2025-12-23
 - [1.1.1](#111---2025-12-13
 - [1.1.0](#110---2025-12-12)
 - [1.0.0](#100---2025-11-29)
 
 ## [Unreleased][]
+### Added
+### Changed
+### Removed
+### Fixed
+
+## [1.3.0] - 2026-01-12
 ### Added
 - UI: added background y-axis margin setting. It only applies when cropping is set to none. While using any other mode, it stretches the image instead. This setting can be directly changed using the mouse wheel + CTRL + ALT + SHIFT too. Note in all my scripts UI elements can be resized using the mouse wheel + CTRL + ALT. And background settings are always accessed also pressing SHIFT.
 - UI: added background art mode cycling when using the mouse wheel + SHIFT. It will only cycle between art actually present for current track, omitting not found ones.
@@ -64,7 +71,8 @@
 
 ### Fixed
 
-[Unreleased]: ../../compare/v1.2.0...HEAD
+[Unreleased]: ../../compare/v1.3.0...HEAD
+[1.3.0]: ../../compare/v1.2.0...v1.3.0
 [1.2.0]: ../../compare/v1.1.1...v1.2.0
 [1.1.1]: ../../compare/v1.1.0...v1.1.1
 [1.1.0]: ../../compare/v1.0.0...v1.1.0

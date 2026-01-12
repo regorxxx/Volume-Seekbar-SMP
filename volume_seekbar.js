@@ -1,7 +1,7 @@
 'use strict';
-//08/01/2026
+//12/01/26
 
-if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.2.0-beta' }); }
+if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.3.0' }); }
 
 include('helpers\\helpers_xxx.js');
 /* global folders:readable, globSettings:readable, globProfiler:readable, VK_CONTROL:readable, VK_ALT:readable, VK_SHIFT:readable */
