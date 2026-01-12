@@ -1,5 +1,5 @@
 'use strict';
-//01/01/26
+//12/01/26
 
 /* exported _slider */
 
@@ -818,7 +818,7 @@ function _slider({
 	 * @returns {void(0)}
 	*/
 	this.wheel = (s) => {
-		if (this.trace(this.mx, this.my) && s !== 0) {
+		if (this.trace(this.mX, this.mY) && s !== 0) {
 			if (s > 0) {
 				this.callbacks.wheelUp && this.callbacks.wheelUp.call(this, s);
 			} else {
@@ -841,14 +841,14 @@ function _slider({
 	 * @returns {boolean}
 	*/
 	this.wheelResize = (step, bForce) => {
-		if ((this.trace(this.mx, this.my) || bForce) && step !== 0) {
+		if ((this.trace(this.mX, this.mY) || bForce) && step !== 0) {
 			let key, min, max;
 			switch (true) {
-				case this.traceButton(this.mx, this.my, 'left') || this.traceButton(this.mx, this.my, 'right'):
+				case this.traceButton(this.mX, this.mY, 'left') || this.traceButton(this.mX, this.mY, 'right'):
 					key = 'buttonY'; min = 0; max = Infinity; break;
-				case this.traceSelector(this.mx, this.my):
+				case this.traceSelector(this.mX, this.mY):
 					key = 'selectorW'; min = 8; max = Infinity; break;
-				case this.traceBar(this.mx, this.my):
+				case this.traceBar(this.mX, this.mY):
 					key = 'margin'; min = 0; max = 40; break;
 			}
 			if (!key) { return; }
@@ -878,8 +878,8 @@ function _slider({
 	 * @returns {void(0)}
 	*/
 	this.move = (x, y) => {
-		this.mx = x;
-		this.my = y;
+		this.mX = x;
+		this.mY = y;
 		if (this.trace(x, y)) {
 			x -= this.x + this.marginX + this.offsetX;
 			const pos = x <= 0
@@ -894,18 +894,18 @@ function _slider({
 			if (this.isDrag) {
 				this.callbacks.lDrag && this.callbacks.lDrag.call(this, this.dragLin, this.dragLog);
 				bRepaint = true;
-			} else if (this.traceSelector(this.mx, this.my)) {
+			} else if (this.traceSelector(this.mX, this.mY)) {
 				this.isHoverSelector = true;
 				this.button.left.hover = this.button.right.hover = false;
 				window.SetCursor(IDC_HAND);
 				bRepaint = true;
-			} else if (this.traceButton(this.mx, this.my, 'left')) {
+			} else if (this.traceButton(this.mX, this.mY, 'left')) {
 				this.isDrag = false;
 				this.isHoverSelector = false;
 				this.button.left.hover = true;
 				window.SetCursor(IDC_HAND);
 				bRepaint = true;
-			} else if (this.traceButton(this.mx, this.my, 'right')) {
+			} else if (this.traceButton(this.mX, this.mY, 'right')) {
 				this.isDrag = false;
 				this.isHoverSelector = false;
 				this.button.right.hover = true;
@@ -1074,7 +1074,7 @@ function _slider({
 		if (!this.isHoverSelector || this.button.right.hover || this.button.left.hover) { return; }
 		if (this.callbacks.dblclkSel) { this.callbacks.dblclkSel.call(this, this.dragLin, this.dragLog); }
 		else {
-			if (this.dragLin === 0 || this.mx <= this.x + this.marginX + this.offsetX + this.selectorW / 2) {
+			if (this.dragLin === 0 || this.mX <= this.x + this.marginX + this.offsetX + this.selectorW / 2) {
 				this.dragLin = this.dragLog = 100;
 			} else {
 				this.dragLin = this.dragLog = 0;
@@ -1168,9 +1168,9 @@ function _slider({
 	/** @type {number} - Slider current value/position */
 	this.current = 1;
 	/** @type {number} - Cached x-mouse position */
-	this.mx = 0;
+	this.mX = 0;
 	/** @type {number} - Cached y-mouse position */
-	this.my = 0;
+	this.mY = 0;
 	/** @type {{left: {x: number, y: number, w: number, h:number, hover:boolean, down:boolean}, right: {x: number, y: number, w: number, h:number, hover:boolean, down:boolean}}} - Cached y - mouse position */
 	this.button = { left: { x: 0, y: 0, w: 0, h: 0, hover: false, down: false }, right: { x: 0, y: 0, w: 0, h: 0, hover: false, down: false } };
 	/** @type {boolean} - Flag for mouse over panel */
