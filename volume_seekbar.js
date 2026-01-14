@@ -1,7 +1,7 @@
 'use strict';
-//12/01/26
+//14/01/26
 
-if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.3.0' }); }
+if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.3.0-beta' }); }
 
 include('helpers\\helpers_xxx.js');
 /* global folders:readable, globSettings:readable, globProfiler:readable, VK_CONTROL:readable, VK_ALT:readable, VK_SHIFT:readable */
@@ -16,7 +16,7 @@ include('helpers\\helpers_xxx_prototypes.js');
 include('helpers\\helpers_xxx_prototypes_smp.js');
 /* global extendGR:readable */
 include('helpers\\helpers_xxx_properties.js');
-/* global setProperties:readable, getPropertiesPairs:readable, overwriteProperties:readable */
+/* global setProperties:readable, getPropertiesPairs:readable, overwriteProperties:readable, checkJsonProperties:readable */
 include('helpers\\helpers_xxx_UI.js');
 /* global RGB:readable, _scale:readable, _tt:readable, chars:readable */
 include('main\\volume_seekbar\\volume_seekbar_menu.js');
@@ -69,6 +69,7 @@ let properties = {
 Object.keys(properties).forEach(p => properties[p].push(properties[p][1]));
 setProperties(properties, '', 0); //This sets all the panel properties at once
 properties = getPropertiesPairs(properties, '', 0);
+checkJsonProperties(properties);
 
 globProfiler.Print('settings');
 const wheel = new _wheel({
