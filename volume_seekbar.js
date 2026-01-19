@@ -1,5 +1,5 @@
 'use strict';
-//14/01/26
+//16/01/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.3.0-beta' }); }
 
@@ -251,7 +251,7 @@ const tooltip = new _tt(null, void (0), void (0), 600);
 // Helpers
 slider.shareUiSettings = function (mode = 'popup') {
 	const settings = Object.fromEntries(
-		['colors', 'style', 'marginXPerc', 'marginYPerc', 'selectorW', 'buttonY', 'offsetX', 'background', 'bDynamicColors']
+		['colors', 'style', 'marginXPerc', 'marginYPerc', 'selectorW', 'buttonY', 'offsetX', 'background', 'bDynamicColors', 'bOnNotifyColors', 'bNotifyColors']
 			.map((key) => [key, clone(properties[key].slice(0, 2))])
 	);
 	switch (mode.toLowerCase()) {
@@ -285,7 +285,7 @@ slider.applyUiSettings = function (settings, bForce) {
 	if (answer === popup.yes) {
 		const newBg = JSON.parse(String(settings.background[1]));
 		['x', 'y', 'w', 'h', 'callbacks'].forEach((key) => delete newBg[key]);
-		['bDynamicColors'].forEach((key) => {
+		['bDynamicColors', 'bOnNotifyColors', 'bNotifyColors'].forEach((key) => {
 			properties[key][1] = !!settings[key][1];
 			if (Object.hasOwn(this, key)) { this[key] = properties[key][1]; }
 		});

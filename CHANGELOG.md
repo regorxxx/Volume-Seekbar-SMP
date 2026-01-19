@@ -13,6 +13,7 @@
 ### Changed
 ### Removed
 ### Fixed
+- UI: added some missing settings for 'Share UI settings' feature.
 - UI: fixed art cycling glitch on background folder mode after using the mouse wheel.
 
 ## [1.3.0] - 2026-01-12
