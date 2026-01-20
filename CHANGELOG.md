@@ -11,6 +11,7 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+- UI: changed limits for Y-axis size.
 ### Removed
 ### Fixed
 - UI: added some missing settings for 'Share UI settings' feature.

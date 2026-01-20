@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 //15/01/26
 
 /* exported createSliderMenu, importSettingsMenu */
@@ -299,7 +299,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 					if (utils.IsKeyPressed(VK_CONTROL)) {
 						input = properties[opt.key][3];
 					} else {
-						input = Input.number('real positive', parent[opt.key], 'Enter value:\n(real number ≥0 and <40)', 'Volume-Seekbar: ' + opt.entryText, 20, [n => n >= 0 && n < 40]);
+						input = Input.number('real positive', parent[opt.key], 'Enter value:\n(real number ≥0 and <100)', 'Volume-Seekbar: ' + opt.entryText, 20, [n => n >= 0 && n < 100]);
 						if (input === null) { return; }
 					}
 					properties[opt.key][1] = parent[opt.key] = input;

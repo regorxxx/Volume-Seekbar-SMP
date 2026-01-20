@@ -1,5 +1,5 @@
-'use strict';
-//16/01/26
+﻿'use strict';
+//20/01/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.3.0-beta' }); }
 
@@ -47,8 +47,8 @@ let properties = {
 		rightButton: 'increase',
 		shade: 'none'
 	}), { func: isJSON, forceDefaults: true }],
-	marginXPerc: ['X-axis margin (% of window width).', 2.5, { func: isFinite, range: [[0, 40]] }],
-	marginYPerc: ['Y-axis margin (% of window width).', 20, { func: isFinite, range: [[0, 40]] }],
+	marginXPerc: ['X-axis margin (% of window width).', 2.5, { func: isFinite, range: [[0, 100]] }],
+	marginYPerc: ['Y-axis margin (% of window width).', 20, { func: isFinite, range: [[0, 100]] }],
 	offsetX: ['X-axis offset (% of window width).', 0, { func: isFinite, range: [[-100, 100]] }],
 	buttonY: ['Y-axis button scale (% of bar height).', 100, { func: isFinite, range: [[0, Infinity]] }],
 	selectorW: ['Slider button width (px)', Math.max(_scale(window.Width / 50), 8), { func: isFinite, range: [[8, Infinity]] }],
