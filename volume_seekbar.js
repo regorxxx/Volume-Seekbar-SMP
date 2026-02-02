@@ -1,5 +1,5 @@
 ﻿'use strict';
-//20/01/26
+//02/02/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.3.0-beta' }); }
 
@@ -20,7 +20,7 @@ include('helpers\\helpers_xxx_properties.js');
 include('helpers\\helpers_xxx_UI.js');
 /* global RGB:readable, _scale:readable, _tt:readable, chars:readable */
 include('main\\volume_seekbar\\volume_seekbar_menu.js');
-/* global createSliderMenu:readable, importSettingsMenu:readable, WshShell:readable, popup:readable */
+/* global createSliderMenu:readable, onRbtnUpImportSettings:readable, WshShell:readable, popup:readable */
 include('main\\window\\window_xxx_background.js');
 /* global _background:readable */
 include('main\\window\\window_xxx_dynamic_colors.js');
@@ -354,7 +354,7 @@ addEventListener('on_mouse_lbtn_up', (x, y) => {
 
 addEventListener('on_mouse_rbtn_up', (x, y) => {
 	if (utils.IsKeyPressed(VK_CONTROL) && utils.IsKeyPressed(VK_LWIN)) {
-		return importSettingsMenu(slider, properties).btn_up(x, y);
+		return onRbtnUpImportSettings.call(slider, properties).btn_up(x, y);
 	}
 	return createSliderMenu(slider, background, wheel, properties).btn_up(x, y);
 });

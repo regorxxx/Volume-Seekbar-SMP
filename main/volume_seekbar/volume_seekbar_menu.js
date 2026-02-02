@@ -1,7 +1,7 @@
 ﻿'use strict';
-//15/01/26
+//02/02/26
 
-/* exported createSliderMenu, importSettingsMenu */
+/* exported createSliderMenu, onRbtnUpImportSettings */
 
 include('..\\..\\helpers\\helpers_xxx.js');
 /* global folders:readable, MF_GRAYED:readable, MF_STRING:readable, VK_CONTROL:readable, globSettings:readable, checkUpdate:readable */
@@ -447,7 +447,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 				properties.bAutoUpdateCheck[1] = !properties.bAutoUpdateCheck[1];
 				overwriteProperties(properties);
 				if (properties.bAutoUpdateCheck[1]) {
-					if (typeof checkUpdate === 'undefined') { include('helpers\\helpers_xxx_web_update.js'); }
+					if (typeof checkUpdate === 'undefined') { include('..\\..\\helpers\\helpers_xxx_web_update.js'); }
 					setTimeout(checkUpdate, 1000, { bDownload: globSettings.bAutoUpdateDownload, bOpenWeb: globSettings.bAutoUpdateOpenWeb, bDisableWarning: false });
 				}
 			}
@@ -455,7 +455,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 		menu.newCheckMenuLast(() => properties.bAutoUpdateCheck[1]);
 		menu.newEntry({
 			menuName: subMenu, entryText: 'Check for updates...', func: () => {
-				if (typeof checkUpdate === 'undefined') { include('helpers\\helpers_xxx_web_update.js'); }
+				if (typeof checkUpdate === 'undefined') { include('..\\..\\helpers\\helpers_xxx_web_update.js'); }
 				checkUpdate({ bDownload: globSettings.bAutoUpdateDownload, bOpenWeb: globSettings.bAutoUpdateOpenWeb, bDisableWarning: false })
 					.then((bFound) => !bFound && fb.ShowPopupMessage('No updates found.', window.FullPanelName + ': Update check'));
 			}
@@ -478,9 +478,10 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 	return menu;
 }
 
-function importSettingsMenu(parent, properties = {}) {
+function onRbtnUpImportSettings(properties = this.properties || {}) {
 	const menu = new _menu();
 	menu.newEntry({ entryText: 'Panel menu: ' + window.Name, flags: MF_GRAYED });
+	menu.newEntry({ entryText: 'Version: ' + window.ScriptInfo.Version, flags: MF_GRAYED });
 	menu.newSeparator();
 	// Generic code is left from other packages, but only JSON settings is used
 	menu.newEntry({
@@ -504,7 +505,7 @@ function importSettingsMenu(parent, properties = {}) {
 	menu.newSeparator();
 	menu.newEntry({
 		entryText: 'Share UI settings...', func: () => {
-			parent.shareUiSettings('popup');
+			this.shareUiSettings('popup');
 		}
 	});
 	menu.newSeparator();
@@ -514,6 +515,28 @@ function importSettingsMenu(parent, properties = {}) {
 	menu.newEntry({
 		entryText: 'Panel properties...', func: () => window.ShowProperties()
 	});
+	menu.newSeparator();
+	{
+		const subMenu = menu.newMenu('Updates');
+		menu.newEntry({
+			menuName: subMenu, entryText: 'Automatically check for updates', func: () => {
+				properties.bAutoUpdateCheck[1] = !properties.bAutoUpdateCheck[1];
+				overwriteProperties(properties);
+				if (properties.bAutoUpdateCheck[1]) {
+					if (typeof checkUpdate === 'undefined') { include('..\\..\\helpers\\helpers_xxx_web_update.js'); }
+					setTimeout(checkUpdate, 1000, { bDownload: globSettings.bAutoUpdateDownload, bOpenWeb: globSettings.bAutoUpdateOpenWeb, bDisableWarning: false });
+				}
+			}
+		});
+		menu.newCheckMenuLast(() => properties.bAutoUpdateCheck[1]);
+		menu.newEntry({
+			menuName: subMenu, entryText: 'Check for updates...', func: () => {
+				if (typeof checkUpdate === 'undefined') { include('..\\..\\helpers\\helpers_xxx_web_update.js'); }
+				checkUpdate({ bDownload: globSettings.bAutoUpdateDownload, bOpenWeb: globSettings.bAutoUpdateOpenWeb, bDisableWarning: false })
+					.then((bFound) => !bFound && fb.ShowPopupMessage('No updates found.', window.FullPanelName + ': Update check'));
+			}
+		});
+	}
 	menu.newSeparator();
 	menu.newEntry({
 		entryText: 'Reload panel', func: () => window.Reload()
