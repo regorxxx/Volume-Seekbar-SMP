@@ -18,6 +18,7 @@
 - UI: added some missing settings for 'Share UI settings' feature.
 - UI: small fixes for background blend color mode.
 - UI: fixed art cycling glitch on background folder mode after using the mouse wheel.
+- Auto-update: fix error including a file when enabling auto-updates if it was previously disabled.
 
 ## [1.3.0] - 2026-01-12
 ### Added
