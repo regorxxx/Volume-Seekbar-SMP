@@ -1,5 +1,5 @@
 ﻿'use strict';
-//02/02/26
+//24/02/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '1.3.0-beta' }); }
 
@@ -12,7 +12,7 @@ include('helpers\\helpers_xxx_flags.js');
 include('helpers\\helpers_xxx_input.js');
 /* global Input:readable */
 include('helpers\\helpers_xxx_prototypes.js');
-/* global isJSON:readable, isBoolean:readable, round:readable, clone:readable */
+/* global isJSON:readable, isBoolean:readable, round:readable, clone:readable, isInt:readable */
 include('helpers\\helpers_xxx_prototypes_smp.js');
 /* global extendGR:readable */
 include('helpers\\helpers_xxx_properties.js');
@@ -33,6 +33,7 @@ include('main\\window\\window_xxx_wheel.js');
 globProfiler.Print('helpers');
 
 let properties = {
+	drawMode: ['Draw mode: GDI (0), D2D (1)', 0, { func: isInt, range: [[0,1]] }],
 	colors: ['Colors', JSON.stringify({
 		background: RGB(50, 50, 50),
 		left: RGB(30, 70, 70),
@@ -70,6 +71,9 @@ Object.keys(properties).forEach(p => properties[p].push(properties[p][1]));
 setProperties(properties, '', 0); //This sets all the panel properties at once
 properties = getPropertiesPairs(properties, '', 0);
 checkJsonProperties(properties);
+
+// GDI/D2D draw mode
+window.DrawMode = properties.drawMode[1];
 
 globProfiler.Print('settings');
 const wheel = new _wheel({
