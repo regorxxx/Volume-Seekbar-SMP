@@ -1,5 +1,5 @@
 'use strict';
-//12/01/26
+//27/02/26
 
 /* exported _slider */
 
@@ -409,8 +409,8 @@ function _slider({
 					const shadeGr = shadeImg.GetGraphics();
 					shadeGr.SetSmoothingMode(2);
 					pointFunc(shadeGr, shadeCol);
-					shadeImg.StackBlur(shadeW);
 					shadeImg.ReleaseGraphics(shadeGr);
+					shadeImg.StackBlur(shadeW);
 					gr.DrawImage(shadeImg, 0, 0, window.Width, window.Height, 0, 0, shadeImg.Width, shadeImg.Height);
 				}
 				: null;
@@ -607,8 +607,8 @@ function _slider({
 							const shadeGr = shade.GetGraphics();
 							shadeGr.SetSmoothingMode(2);
 							shadeGr.GdiDrawText(icon, font, shadeCol, 0, 0, button.w, button.h, DT_VCENTER | DT_CENTER | DT_CALCRECT);
-							shade.StackBlur(shadeW);
 							shade.ReleaseGraphics(shadeGr);
+							shade.StackBlur(shadeW);
 							return shade;
 						}
 						: null;
