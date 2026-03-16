@@ -1,10 +1,10 @@
 'use strict';
-//27/02/26
+//16/03/26
 
 /* exported _slider */
 
 include('window_xxx_helpers.js');
-/* global darkenColor:readable, lightenColor:readable, blendColors:readable, isDark:readable, toRGB:readable, opaqueColor:readable, IDC_HAND:readable, IDC_ARROW:readable, _gdiFont:readable, _scale:readable, DT_VCENTER:readable, DT_RIGHT:readable, DT_CALCRECT:readable, DT_CENTER:readable */
+/* global darkenColor:readable, lightenColor:readable, blendColors:readable, isDark:readable, toRGB:readable, opaqueColor:readable, IDC_HAND:readable, IDC_ARROW:readable, _gdiFont:readable, _scale:readable, DT_VCENTER:readable, DT_RIGHT:readable, DT_CALCRECT:readable, DT_CENTER:readable, SmoothingMode:readable */
 
 /**
  * Horizontal slider.
@@ -151,7 +151,7 @@ function _slider({
 		const w = this.selectorW;
 		const h = this.h;
 		const w2 = w / 2;
-		gr.SetSmoothingMode(2);
+		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (['simple', 'complex'].includes(this.style.shade)) {
 			const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 7);
 			gr.FillSolidRect(x - w2 - w2 / 3, this.y, Math.max(w, 4) + 2 * w2 / 3, this.h, shadeCol);
@@ -174,7 +174,7 @@ function _slider({
 		shadeW = Math.round(w2 / 10) || 1;
 		gr.DrawLine(x - w2, (this.y + h) / 2, x + w2, (this.y + h) / 2, shadeW * 1.5, darkenColor(color, 15));
 		gr.DrawRoundRect(x - w2, this.y, Math.max(w, 4), h, 2, 2, shadeW, darkenColor(color, 15));
-		gr.SetSmoothingMode(0);
+		gr.SetSmoothingMode();
 	};
 	/**
 	 * Paints a simple rounded button at current position
@@ -193,7 +193,7 @@ function _slider({
 			: this.colors.sel;
 		const w = this.selectorW;
 		const w2 = w / 2;
-		gr.SetSmoothingMode(2);
+		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (['simple', 'complex'].includes(this.style.shade)) {
 			const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 7);
 			if (['triangle', 'histogram', 'histogramgradient'].includes(this.style.bar.toLowerCase())) {
@@ -209,7 +209,7 @@ function _slider({
 			gr.FillEllipse(x - w2, (this.y + this.h - w) / 2, w, w, color);
 			gr.DrawEllipse(x - w2, (this.y + this.h - w) / 2, w, w, Math.round(w2 / 10) || 1, darkenColor(color, 15));
 		}
-		gr.SetSmoothingMode(0);
+		gr.SetSmoothingMode();
 	};
 	/**
 	 * Paints a rounded themed button at current position
@@ -234,7 +234,7 @@ function _slider({
 		const wInt = w * 0.65;
 		const wInt2 = wInt / 3;
 		const wInt3 = wInt / 10;
-		gr.SetSmoothingMode(2);
+		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (['simple', 'complex'].includes(this.style.shade)) {
 			const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 7);
 			if (['triangle', 'histogram', 'histogramgradient'].includes(this.style.bar.toLowerCase())) {
@@ -256,7 +256,7 @@ function _slider({
 			gr.FillEllipse(x - wInt3 / 2, (this.y + this.h - wInt3) / 2, wInt3, wInt3, lightenColor(color, 30));
 			gr.DrawEllipse(x - w2, (this.y + this.h - w) / 2, w, w, Math.round(w2 / 10) || 1, darkenColor(color, 15));
 		}
-		gr.SetSmoothingMode(0);
+		gr.SetSmoothingMode();
 	};
 	/**
 	 * Paints a triangle x-bar which may be filled with 2 colors
@@ -314,7 +314,7 @@ function _slider({
 				);
 			}
 		}
-		gr.SetSmoothingMode(2);
+		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (points.length) {
 			points.forEach((layer) => {
 				gr.FillPolygon(layer.color, 1, layer.coords);
@@ -336,7 +336,7 @@ function _slider({
 				);
 			}
 		}
-		gr.SetSmoothingMode(0);
+		gr.SetSmoothingMode();
 	};
 	/**
 	 * Paints a triangle-histogram x-bar which may be filled with 2 colors or a gradient
@@ -400,14 +400,14 @@ function _slider({
 				]);
 			}
 		}
-		gr.SetSmoothingMode(2);
+		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (points.length) {
 			const paintShade = this.style.shade === 'complex'
 				? (shadeW, tint, pointFunc) => {
 					const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 80), tint);
 					const shadeImg = gdi.CreateImage(window.Width, window.Height);
 					const shadeGr = shadeImg.GetGraphics();
-					shadeGr.SetSmoothingMode(2);
+					shadeGr.SetSmoothingMode(SmoothingMode.HighQuality);
 					pointFunc(shadeGr, shadeCol);
 					shadeImg.ReleaseGraphics(shadeGr);
 					shadeImg.StackBlur(shadeW);
@@ -433,7 +433,7 @@ function _slider({
 				}
 			}
 		}
-		gr.SetSmoothingMode(0);
+		gr.SetSmoothingMode();
 	};
 	/**
 	 * Paints a rounded x-bar which may be filled with 2 colors or a gradient
@@ -454,7 +454,7 @@ function _slider({
 		const bGrad = this.style.bar.toLowerCase() === 'roundedgradient';
 		const y = (this.y + this.h - h) / 2;
 		const arc = h / 2;
-		gr.SetSmoothingMode(2);
+		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (this.colors.left === this.colors.right && this.colors.left !== -1) {
 			gr.FillRoundRect(x, y, w, h, arc, arc, this.colors.left, 15);
 		} else {
@@ -526,7 +526,7 @@ function _slider({
 				const shadeW = Math.max(this.h / 30, 3);
 				const shade = gdi.CreateImage(w + shadeW * 2, h + shadeW * 2);
 				const shadeGr = shade.GetGraphics();
-				shadeGr.SetSmoothingMode(2);
+				shadeGr.SetSmoothingMode(SmoothingMode.HighQuality);
 				shadeGr.DrawRoundRect(shadeW, shadeW, w, h, arc, arc, shadeW, shadeCol);
 				shade.ReleaseGraphics(shadeGr);
 				gr.DrawImage(shade, x - shadeW, y - shadeW, shade.Width, shade.Height / 2, 0, 0, shade.Width, shade.Height / 2, 0, 35);
@@ -534,7 +534,7 @@ function _slider({
 
 			}
 		}
-		gr.SetSmoothingMode(0);
+		gr.SetSmoothingMode();
 	};
 	/**
 	 * Selects button icon according to style. Tries to retrieve icon from this.callbacks.buttonIcon() callback first; in case an empty string is returned, uses default values. If no scale is returned, fallbacks to 1.
@@ -605,7 +605,7 @@ function _slider({
 							const shadeCol = (isDark(this.colors.background) ? lightenColor : darkenColor)(color, tint);
 							const shade = gdi.CreateImage(button.w, button.h);
 							const shadeGr = shade.GetGraphics();
-							shadeGr.SetSmoothingMode(2);
+							shadeGr.SetSmoothingMode(SmoothingMode.HighQuality);
 							shadeGr.GdiDrawText(icon, font, shadeCol, 0, 0, button.w, button.h, DT_VCENTER | DT_CENTER | DT_CALCRECT);
 							shade.ReleaseGraphics(shadeGr);
 							shade.StackBlur(shadeW);
