@@ -1,5 +1,5 @@
 ﻿'use strict';
-//02/02/26
+//17/04/26
 
 /* exported createSliderMenu, onRbtnUpImportSettings */
 
@@ -227,9 +227,9 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 						// Ensure it's applied with compatible settings
 						parentBackground.changeConfig({
 							bRepaint: false, callbackArgs: { bSaveProperties: true },
-							config: !parentBackground.useCover
-								? { coverMode: parentBackground.getDefaultCoverMode(), coverModeOptions: { alpha: 0, bProcessColors: true } }
-								: { coverModeOptions: { bProcessColors: true } },
+							config: parentBackground.useCover
+								? { coverModeOptions: { bProcessColors: true } }
+								: { coverMode: parentBackground.getDefaultCoverMode(), coverModeOptions: { alpha: 0, bProcessColors: true } },
 						});
 						parentBackground.updateImageBg(true);
 					} else {
@@ -262,9 +262,9 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 						else if (!parentBackground.useCoverColors) {
 							parentBackground.changeConfig({
 								bRepaint: false, callbackArgs: { bSaveProperties: true },
-								config: !parentBackground.useCover
-									? { coverMode: parentBackground.getDefaultCoverMode(), coverModeOptions: { alpha: 0, bProcessColors: true } }
-									: { coverModeOptions: { bProcessColors: true } },
+								config: parentBackground.useCover
+									? { coverModeOptions: { bProcessColors: true } }
+									: { coverMode: parentBackground.getDefaultCoverMode(), coverModeOptions: { alpha: 0, bProcessColors: true } },
 							});
 						}
 					}
