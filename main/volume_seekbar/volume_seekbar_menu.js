@@ -1,5 +1,5 @@
 ﻿'use strict';
-//17/04/26
+//27/04/26
 
 /* exported createSliderMenu, onRbtnUpImportSettings */
 
@@ -469,7 +469,7 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 	});
 	menu.newSeparator();
 	menu.newEntry({
-		entryText: 'Open readme...', func: () => {
+		entryText: 'Open help...', func: () => {
 			const readmePath = folders.xxx + 'helpers\\readme\\volume_seekbar.txt';
 			const readme = _open(readmePath, utf8);
 			if (readme.length) { fb.ShowPopupMessage(readme, window.ScriptInfo.Name); }
