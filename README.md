@@ -1,8 +1,6 @@
 # Volume-Seekbar-SMP
 [![version][version_badge]][changelog]
-[![CodeFactor][codefactor_badge]](https://www.codefactor.io/repository/github/regorxxx/Volume-Seekbar-SMP/overview/main)
-[![CodacyBadge][codacy_badge]](https://www.codacy.com/gh/regorxxx/Volume-Seekbar-SMP/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=regorxxx/Volume-Seekbar-SMP&amp;utm_campaign=Badge_Grade)
-![GitHub](https://img.shields.io/github/license/regorxxx/Volume-Seekbar-SMP)  
+![GitHub](https://img.shields.io/badge/license-NON--AI_AGPL--3.0-blue)  
 Volume bar and seekbar for [foobar2000](https://www.foobar2000.org/) and [Spider Monkey Panel](https://theqwertiest.github.io/foo_spider_monkey_panel/)/[JSplitter](https://foobar2000.ru/forum/viewtopic.php?t=6378), with theme support and custom actions. 
 
 ![volume](https://github.com/user-attachments/assets/9332e102-5772-4e7a-b24d-298073ab2972)
