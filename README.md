@@ -13,6 +13,7 @@ Volume bar and seekbar for [foobar2000](https://www.foobar2000.org/) and [Spider
 - Configurable layout, buttons, actions and colors using R. Click menu.
 - Elements may be disabled removing color or setting size to 0.
 - Tool-tip shows info about actions or elements.
+- D2D support (requires JSplitter).
 - Fully Wine - Unix - non IE SOs compatible.
 - Automatically check for updates (configurable).
 
