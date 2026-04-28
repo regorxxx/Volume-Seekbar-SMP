@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.0.0](#200---2026-04-28
 - [1.3.0](#130---2026-01-12
 - [1.2.0](#120---2025-12-23
 - [1.1.1](#111---2025-12-13
@@ -9,6 +10,12 @@
 - [1.0.0](#100---2025-11-29)
 
 ## [Unreleased][]
+### Added
+### Changed
+### Removed
+### Fixed
+
+## [2.0.0] - 2026-04-28
 ### Added
 - UI: added support for D2D draw mode if JS Host supports it (currently only JSplitter 3.7.8+ or 4.1.0+). It must be set per instance, at the properties panel ('Draw mode: GDI (0), D2D (1)'). If JS Host doesn't support it, it will fallback to GDI. Note D2D mode may produce UI artifacts under Wine or not be fully equivalent to GDI, use at your own consideration and only report problems to JS host component devs.
 - UI: ported all background art effect settings to D2D effects. Note bloom will render in a similar way to GDI+ but mute and edge are noticeably different. There is a new setting while using D2D draw mode (see above) to force the GDI+ effect looks, in case D2D draw mode is preferred but also the previous effect looks. In the future, if the list of D2D effects is expanded, enabling that setting will make these new effects unavailable (since they will not have a GDI+ counterpart).
@@ -86,7 +93,8 @@
 
 ### Fixed
 
-[Unreleased]: ../../compare/v1.3.0...HEAD
+[Unreleased]: ../../compare/v2.0.0...HEAD
+[2.0.0]: ../../compare/v1.3.0...v2.0.0
 [1.3.0]: ../../compare/v1.2.0...v1.3.0
 [1.2.0]: ../../compare/v1.1.1...v1.2.0
 [1.1.1]: ../../compare/v1.1.0...v1.1.1
