@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.0.1](#201---2026-05-02
 - [2.0.0](#200---2026-04-28
 - [1.3.0](#130---2026-01-12
 - [1.2.0](#120---2025-12-23
@@ -14,6 +15,13 @@
 ### Changed
 ### Removed
 ### Fixed
+
+## [2.0.1] - 2026-05-02
+### Added
+### Changed
+### Removed
+### Fixed
+- Fix version number not changed on previous version, triggering auto-update message on every startup.
 
 ## [2.0.0] - 2026-04-28
 ### Added
@@ -93,7 +101,8 @@
 
 ### Fixed
 
-[Unreleased]: ../../compare/v2.0.0...HEAD
+[Unreleased]: ../../compare/v2.0.1...HEAD
+[2.0.1]: ../../compare/v2.0.0...v2.0.1
 [2.0.0]: ../../compare/v1.3.0...v2.0.0
 [1.3.0]: ../../compare/v1.2.0...v1.3.0
 [1.2.0]: ../../compare/v1.1.1...v1.2.0
