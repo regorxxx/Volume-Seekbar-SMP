@@ -15,6 +15,7 @@
 ### Changed
 ### Removed
 ### Fixed
+- Fix link at package description. See [Issue 2](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/2).
 
 ## [2.0.1] - 2026-05-02
 ### Added
