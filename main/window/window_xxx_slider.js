@@ -1,5 +1,5 @@
 'use strict';
-//16/03/26
+//07/05/26
 
 /* exported _slider */
 
@@ -103,9 +103,11 @@ function _slider({
 		this.offsetW = this.paintButton(gr, 'right', this.x + this.w - this.marginX, h, true);
 		this.barW = this.w - this.marginX * 2 - this.offsetX - this.offsetW;
 		this.barX = this.x + this.marginX + this.offsetX;
-		const currW = this.barW * this.current;
-		this.paintBar(gr, this.barX, this.barW, h);
-		this.paintSelector(gr, this.barX + currW, h);
+		const bPaintedBar = this.paintBar(gr, this.barX, this.barW, h);
+		if (bPaintedBar) {
+			const currW = this.barW * this.current;
+			this.paintSelector(gr, this.barX + currW, h);
+		}
 		if (this.bDebug) { this.paintDebug(gr, this.barX, this.barW); }
 	};
 	/**
@@ -269,7 +271,7 @@ function _slider({
 	 * @param {number} x - Left coordinate to paint the bar.
 	 * @param {number} currW - Current volume position.
 	 * @param {number} h - Current volume position height. Varies at different volumes.
-	 * @returns {void(0)}
+	 * @returns {boolean} True on sucessful paint
 	*/
 	this.paintTriangleBar = (gr, x, w, h) => {
 		if (typeof h === 'undefined') { h = (this.h - this.marginY * 2) * this.current; }
@@ -337,6 +339,7 @@ function _slider({
 			}
 		}
 		gr.SetSmoothingMode();
+		return true;
 	};
 	/**
 	 * Paints a triangle-histogram x-bar which may be filled with 2 colors or a gradient
@@ -349,7 +352,7 @@ function _slider({
 	 * @param {number} x - Left coordinate to paint the bar.
 	 * @param {number} currW - Current volume position.
 	 * @param {number} h - Current volume position height. Varies at different volumes.
-	 * @returns {void(0)}
+	 * @returns {boolean} True on sucessful paint
 	*/
 	this.paintHistogramBar = (gr, x, w) => {
 		const currW = w * this.current;
@@ -434,6 +437,7 @@ function _slider({
 			}
 		}
 		gr.SetSmoothingMode();
+		return true;
 	};
 	/**
 	 * Paints a rounded x-bar which may be filled with 2 colors or a gradient
@@ -446,7 +450,7 @@ function _slider({
 	 * @param {number} x - Left coordinate to paint the bar.
 	 * @param {number} currW - Current position.
 	 * @param {number} h - Height of the bar. Constant for all points.
-	 * @returns {void(0)}
+	 * @returns {boolean} True on sucessful paint
 	*/
 	this.paintRoundedBar = (gr, x, w, h) => {
 		if (typeof h === 'undefined') { h = Math.max(Math.round((this.y + this.h - this.marginY) / 3), 2); }
@@ -454,6 +458,10 @@ function _slider({
 		const bGrad = this.style.bar.toLowerCase() === 'roundedgradient';
 		const y = (this.y + this.h - h) / 2;
 		const arc = h / 2;
+		if (w - arc < x) {
+			if (arc > 1) { return this.paintRoundedBar(gr, x, w, h / 2); }
+			else { return false; }
+		}
 		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (this.colors.left === this.colors.right && this.colors.left !== -1) {
 			gr.FillRoundRect(x, y, w, h, arc, arc, this.colors.left, 15);
@@ -535,6 +543,7 @@ function _slider({
 			}
 		}
 		gr.SetSmoothingMode();
+		return true;
 	};
 	/**
 	 * Selects button icon according to style. Tries to retrieve icon from this.callbacks.buttonIcon() callback first; in case an empty string is returned, uses default values. If no scale is returned, fallbacks to 1.
@@ -589,7 +598,10 @@ function _slider({
 			if (this.colors.buttons !== -1) {
 				const { icon, scaleH, minW } = this.selectButtonIcon(this.style[key + 'Button']);
 				if (icon) {
-					const font = _gdiFont('FontAwesome', this.calculateButtonHeight());
+					let size = this.calculateButtonHeight();
+					if (size > this.w / 3) { size = Math.min(size, _scale(this.w / 4)); }
+					if (size < 1) { return this.w / 3; }
+					const font = _gdiFont('FontAwesome', size);
 					button.h = gr.CalcTextHeight(icon, font);
 					button.w = Math.max(minW, gr.CalcTextWidth(icon, font));
 					button.x = x - (bRight ? button.w : 0);
@@ -688,15 +700,15 @@ function _slider({
 		if (['triangle', 'histogram', 'histogramgradient'].includes(this.style.bar.toLowerCase())) {
 			h *= this.current;
 		}
+		if (w <= 0) { return false; }
 		switch (this.style.bar.toLowerCase()) {
 			case 'roundedgradient':
-			case 'rounded': this.paintRoundedBar(gr, x, w, h); break;
+			case 'rounded': return this.paintRoundedBar(gr, x, w, h);
 			case 'histogramgradient':
-			case 'histogram': this.paintHistogramBar(gr, x, w); break;
+			case 'histogram': return this.paintHistogramBar(gr, x, w);
 			case 'triangle':
-			default: this.paintTriangleBar(gr, x, w, h);
+			default: return this.paintTriangleBar(gr, x, w, h);
 		}
-		return h;
 	};
 	/**
 	 * Estimates bar height for a given style.

@@ -17,6 +17,7 @@
 - Readme: improve docs to ensure panel size or elements size is adjusted at first installations. See [Issue 3](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/3).
 ### Removed
 ### Fixed
+- UI: improved behavior when there is not enough space to draw some elements, resizing to lower scales or even disabling them completely. See [Issue 3](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/3).
 - Fix link at package description. See [Issue 2](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/2).
 
 ## [2.0.1] - 2026-05-02
