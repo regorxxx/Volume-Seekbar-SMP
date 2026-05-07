@@ -2,6 +2,10 @@
 at mouse position. Mode may also be changed to seekbar, in which case
 it just handles playback seeking, and shows time at mouse position.
 
+Don't forget to either resize the panel or adjust elements sizes after
+loading the script for optimum presentation. By default elements may
+be bigger than desired or look weird on big panel sizes or proportions!
+
 Usage:
 ------
 	• Drag + L. Click to set volume\time.

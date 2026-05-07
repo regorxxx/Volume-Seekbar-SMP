@@ -1,7 +1,7 @@
 ﻿'use strict';
-//30/04/26
+//07/05/26
 
-if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.0.1' }); }
+if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.0.1-beta' }); }
 
 // GDI/D2D draw mode
 window.DrawMode = Math.max(Math.min(window.GetProperty('Draw mode: GDI (0), D2D (1)', 0), 1), 0);
@@ -45,7 +45,7 @@ let properties = {
 		buttons: RGB(200, 200, 200),
 	}), { func: isJSON, forceDefaults: true }],
 	style: ['Style', JSON.stringify({
-		bar: 'rounded',
+		bar: 'roundedgradient',
 		selector: 'rounded',
 		leftButton: 'decrease',
 		rightButton: 'increase',

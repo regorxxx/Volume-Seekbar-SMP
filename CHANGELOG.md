@@ -13,6 +13,8 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+- UI: rounded gradient bar fill is now the default style for first installations.
+- Readme: improve docs to ensure panel size or elements size is adjusted at first installations. See [Issue 3](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/3).
 ### Removed
 ### Fixed
 - Fix link at package description. See [Issue 2](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/2).
