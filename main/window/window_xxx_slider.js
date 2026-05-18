@@ -1,5 +1,5 @@
 'use strict';
-//07/05/26
+//15/05/26
 
 /* exported _slider */
 
@@ -127,7 +127,7 @@ function _slider({
 		const w = this.selectorW;
 		const w2 = w / 2;
 		if (['simple', 'complex'].includes(this.style.shade)) {
-			const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 7);
+			const shadeCol = this.getShadeColor(this.colors.background, 70, 7);
 			gr.FillSolidRect(x - w2 - w2 / 3, this.y, Math.max(w, 4) + 2 * w2 / 3, this.h, shadeCol);
 		}
 		gr.FillSolidRect(x - w2, this.y, w, this.h, color);
@@ -155,7 +155,7 @@ function _slider({
 		const w2 = w / 2;
 		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (['simple', 'complex'].includes(this.style.shade)) {
-			const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 7);
+			const shadeCol = this.getShadeColor(this.colors.background, 70, 7);
 			gr.FillSolidRect(x - w2 - w2 / 3, this.y, Math.max(w, 4) + 2 * w2 / 3, this.h, shadeCol);
 		}
 		gr.FillGradRect(x - w2, this.y, w, h, 270, color, lightenColor(color, 15));
@@ -197,7 +197,7 @@ function _slider({
 		const w2 = w / 2;
 		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (['simple', 'complex'].includes(this.style.shade)) {
-			const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 7);
+			const shadeCol = this.getShadeColor(this.colors.background, 70, 7);
 			if (['triangle', 'histogram', 'histogramgradient'].includes(this.style.bar.toLowerCase())) {
 				gr.FillEllipse(x - w2 - w2 / 3, this.y + this.h - h / 2 - this.marginY - w2 - w2 / 3, w + 2 * w2 / 3, w + 2 * w2 / 3, shadeCol);
 			} else {
@@ -238,7 +238,7 @@ function _slider({
 		const wInt3 = wInt / 10;
 		gr.SetSmoothingMode(SmoothingMode.HighQuality);
 		if (['simple', 'complex'].includes(this.style.shade)) {
-			const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 7);
+			const shadeCol = this.getShadeColor(this.colors.background, 70, 7);
 			if (['triangle', 'histogram', 'histogramgradient'].includes(this.style.bar.toLowerCase())) {
 				gr.FillEllipse(x - w2 - w2 / 3, this.y + this.h - h / 2 - this.marginY - w2 - w2 / 3, w + 2 * w2 / 3, w + 2 * w2 / 3, shadeCol);
 			} else {
@@ -326,7 +326,7 @@ function _slider({
 		}
 		if (this.colors.background !== -1) {
 			if (['simple', 'complex'].includes(this.style.shade)) {
-				const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 30);
+				const shadeCol = this.getShadeColor(this.colors.background, 70, 30);
 				const shadeW = Math.max(this.h / 30, 3);
 				gr.FillPolygon(
 					shadeCol, 0,
@@ -407,7 +407,7 @@ function _slider({
 		if (points.length) {
 			const paintShade = this.style.shade === 'complex'
 				? (shadeW, tint, pointFunc) => {
-					const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 80), tint);
+					const shadeCol = this.getShadeColor(this.colors.background, 80, tint);
 					const shadeImg = gdi.CreateImage(window.Width, window.Height);
 					const shadeGr = shadeImg.GetGraphics();
 					shadeGr.SetSmoothingMode(SmoothingMode.HighQuality);
@@ -429,7 +429,7 @@ function _slider({
 			});
 			if (this.colors.background !== -1) {
 				if (this.style.shade === 'simple') {
-					const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 80), 10);
+					const shadeCol = this.getShadeColor(this.colors.background, 80, 10);
 					shade.forEach((coords) => gr.FillPolygon(shadeCol, 0, coords));
 				} else if (this.style.shade === 'complex') {
 					paintShade(barW / 10, 10, (shadeGr, shadeCol) => shade.forEach((coords) => shadeGr.FillPolygon(shadeCol, 0, coords)));
@@ -525,12 +525,12 @@ function _slider({
 		}
 		if (this.colors.background !== -1) {
 			if (this.style.shade === 'simple') {
-				const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 25);
+				const shadeCol = this.getShadeColor(this.colors.background, 70, 25);
 				const shadeW = Math.max(this.h / 30, 3);
 				gr.DrawRoundRect(x, y, w, h, arc, arc, shadeW, shadeCol);
 
 			} else if (this.style.shade === 'complex') {
-				const shadeCol = opaqueColor((isDark(this.colors.background) ? lightenColor : darkenColor)(this.colors.background, 70), 50);
+				const shadeCol = this.getShadeColor(this.colors.background, 70, 50);
 				const shadeW = Math.max(this.h / 30, 3);
 				const shade = gdi.CreateImage(w + shadeW * 2, h + shadeW * 2);
 				const shadeGr = shade.GetGraphics();
@@ -614,7 +614,7 @@ function _slider({
 
 					const createShadeImg = this.style.shade === 'complex'
 						? (shadeW, tint) => {
-							const shadeCol = (isDark(this.colors.background) ? lightenColor : darkenColor)(color, tint);
+							const shadeCol = this.getShadeColor(color, tint);
 							const shade = gdi.CreateImage(button.w, button.h);
 							const shadeGr = shade.GetGraphics();
 							shadeGr.SetSmoothingMode(SmoothingMode.HighQuality);
@@ -635,7 +635,7 @@ function _slider({
 					if (this.colors.background !== -1) {
 						if (this.style.shade === 'simple') {
 							const shadeW = - this.calculateButtonHeight() / 10;
-							const shadeCol = (isDark(this.colors.background) ? lightenColor : darkenColor)(color, 10);
+							const shadeCol = this.getShadeColor(color, 10);
 							gr.GdiDrawText(icon, _gdiFont('FontAwesome', this.calculateButtonHeight() + shadeW), shadeCol, button.x, button.y, button.w, button.h, DT_VCENTER | DT_CENTER | DT_CALCRECT);
 						} else if (this.style.shade === 'complex') {
 							const shadeW = this.calculateButtonHeight() / 30;
@@ -709,6 +709,22 @@ function _slider({
 			case 'triangle':
 			default: return this.paintTriangleBar(gr, x, w, h);
 		}
+	};
+	/**
+	 * Calculates shade color against bg. In most cases reference color and bg color should be the same.
+	 *
+	 * @property
+	 * @name getShadeColor
+	 * @kind method
+	 * @memberof _slider
+	 * @param {number} color - Reference
+	 * @param {number} tint
+	 * @param {number} alphaPerc - Alpha percentage (0 is transparent)
+	 * @param {number} bgColor
+	 * @returns {number} Color
+	*/
+	this.getShadeColor = (color, tint, alphaPerc = 100, bgColor = this.colors.background) => {
+		return opaqueColor((isDark(bgColor) ? lightenColor : darkenColor)(color, tint), alphaPerc);
 	};
 	/**
 	 * Estimates bar height for a given style.
