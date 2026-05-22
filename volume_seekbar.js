@@ -1,5 +1,5 @@
 ﻿'use strict';
-//07/05/26
+//22/05/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.0.1-beta' }); }
 
@@ -17,7 +17,7 @@ include('helpers\\helpers_xxx_input.js');
 include('helpers\\helpers_xxx_prototypes.js');
 /* global isJSON:readable, isBoolean:readable, round:readable, clone:readable, isInt:readable */
 include('helpers\\helpers_xxx_prototypes_smp.js');
-/* global extendGR:readable */
+/* global extendGR:readable, checkCompatible:readable */
 include('helpers\\helpers_xxx_properties.js');
 /* global setProperties:readable, getPropertiesPairs:readable, overwriteProperties:readable, checkJsonProperties:readable */
 include('helpers\\helpers_xxx_UI.js');
@@ -34,6 +34,7 @@ include('main\\window\\window_xxx_wheel.js');
 /* global _wheel:readable */
 
 globProfiler.Print('helpers');
+checkCompatible();
 
 let properties = {
 	drawMode: ['Draw mode: GDI (0), D2D (1)', 0, { func: isInt, range: [[0,1]] }],
