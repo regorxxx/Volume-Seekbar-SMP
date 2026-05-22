@@ -14,6 +14,7 @@
 ### Added
 ### Changed
 - UI: rounded gradient bar fill is now the default style for first installations.
+- UI: support for dark themed popups if JS host allows it.
 - Readme: improve docs to ensure panel size or elements size is adjusted at first installations. See [Issue 3](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/3).
 ### Removed
 ### Fixed
