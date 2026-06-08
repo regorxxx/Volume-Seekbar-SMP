@@ -19,9 +19,10 @@
 ### Removed
 ### Fixed
 - UI: improved behavior when there is not enough space to draw some elements, resizing to lower scales or even disabling them completely. See [Issue 3](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/3).
-- UI: improved blend color mode to use a mix of CUI/DUI colors when no art is available (like Biograhpy and Library-Tree-SMP do).
+- UI: improved blend color mode to use a mix of CUI/DUI colors when no art is available (like Biography and Library-Tree-SMP do).
 - Fix link at package description. See [Issue 2](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/2).
-
+- Helpers: updated curl.exe to v8.20.0-slim. See [here](https://github.com/lordmulder/cURL-build-win32).
+- Helpers: updated 7za.exe to v26.01. See [here](https://www.7-zip.org/download.html).
 ## [2.0.1] - 2026-05-02
 ### Added
 ### Changed
