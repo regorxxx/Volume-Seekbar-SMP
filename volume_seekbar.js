@@ -1,5 +1,5 @@
 ﻿'use strict';
-//22/05/26
+//12/06/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.0.1-beta' }); }
 
@@ -321,7 +321,7 @@ if (!properties.firstPopup[1]) {
 
 // Update check
 if (properties.bAutoUpdateCheck[1]) {
-	include('helpers\\helpers_xxx_web_update.js');
+	include('helpers\\helpers_xxx_web.js');
 	/* global checkUpdate:readable */
 	setTimeout(checkUpdate, 120000, { bDownload: globSettings.bAutoUpdateDownload, bOpenWeb: globSettings.bAutoUpdateOpenWeb });
 }
