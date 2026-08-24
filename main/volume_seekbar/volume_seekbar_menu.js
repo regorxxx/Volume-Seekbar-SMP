@@ -1,5 +1,5 @@
 ﻿'use strict';
-//12/06/26
+//24/08/26
 
 /* exported createSliderMenu, onRbtnUpImportSettings */
 
@@ -49,6 +49,15 @@ function createSliderMenu(parent, parentBackground, wheel, properties = {}) {
 			});
 		});
 		menu.newCheckMenuLast(() => options.indexOf(properties.mode[1]), options);
+		menu.newSeparator(menuName);
+		menu.newEntry({
+			menuName, entryText: 'Process panel while not visible', func: () => {
+				properties.bProcessNotVisible[1] = !properties.bProcessNotVisible[1];
+				overwriteProperties(properties);
+				window.Reload();
+			}
+		});
+		menu.newCheckMenuLast(() => properties.bProcessNotVisible[1]);
 	}
 	menu.newSeparator();
 	{
