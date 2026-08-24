@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.1.0](#210---2026-08-24
 - [2.0.1](#201---2026-05-02
 - [2.0.0](#200---2026-04-28
 - [1.3.0](#130---2026-01-12
@@ -12,6 +13,13 @@
 
 ## [Unreleased][]
 ### Added
+### Changed
+### Removed
+### Fixed
+
+## [2.1.0] - 2026-08-24
+### Added
+- UI: added new setting to control panel processing when panel is not visible (true by default), so changes are immediately displayed on panel visibility switching, without delays. See [here](https://hydrogenaudio.org/index.php/topic,126743.msg1083496.html#msg1083496).
 - UI: added fallback to front art setting for Art by TF (background setting), if no file was found.
 - UI: added new mask effect setting to background. See [here](https://hydrogenaudio.org/index.php/topic,112914.msg1084108.html#msg1084108).
 - UI: added new img counter setting to background while using Art by TF mode. See [here](https://hydrogenaudio.org/index.php/topic,116669.msg1083339.html#msg1083339).
@@ -35,6 +43,7 @@ Added mask files.
 - Fix link at package description. See [Issue 2](https://github.com/regorxxx/Volume-Seekbar-SMP/issues/2).
 - Helpers: updated curl.exe to v8.20.0-slim. See [here](https://github.com/lordmulder/cURL-build-win32).
 - Helpers: updated 7za.exe to v26.01. See [here](https://www.7-zip.org/download.html).
+
 ## [2.0.1] - 2026-05-02
 ### Added
 ### Changed
@@ -120,7 +129,8 @@ Added mask files.
 
 ### Fixed
 
-[Unreleased]: ../../compare/v2.0.1...HEAD
+[Unreleased]: ../../compare/v2.1.0...HEAD
+[2.1.0]: ../../compare/v2.0.1...v2.1.0
 [2.0.1]: ../../compare/v2.0.0...v2.0.1
 [2.0.0]: ../../compare/v1.3.0...v2.0.0
 [1.3.0]: ../../compare/v1.2.0...v1.3.0

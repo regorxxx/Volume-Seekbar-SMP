@@ -1,7 +1,7 @@
 ﻿'use strict';
-//12/06/26
+//24/08/26
 
-if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.0.1-beta' }); }
+if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.1.0' }); }
 
 // GDI/D2D draw mode
 window.DrawMode = Math.max(Math.min(window.GetProperty('Draw mode: GDI (0), D2D (1)', 0), 1), 0);
@@ -22,6 +22,8 @@ include('helpers\\helpers_xxx_properties.js');
 /* global setProperties:readable, getPropertiesPairs:readable, overwriteProperties:readable, checkJsonProperties:readable */
 include('helpers\\helpers_xxx_UI.js');
 /* global RGB:readable, _scale:readable, _tt:readable, chars:readable */
+include('helpers\\callbacks_xxx.js');
+/* global runDelayedEventListeners:readable*/
 include('main\\volume_seekbar\\volume_seekbar_menu.js');
 /* global createSliderMenu:readable, onRbtnUpImportSettings:readable, WshShell:readable, popup:readable */
 include('main\\window\\window_xxx_background.js');
@@ -69,7 +71,8 @@ let properties = {
 	bAutoUpdateCheck: ['Automatically check updates', globSettings.bAutoUpdateCheck, { func: isBoolean }],
 	firstPopup: ['Volume/Seekbar slider: Fired once', false, { func: isBoolean }],
 	bOnNotifyColors: ['Adjust colors on panel notify', true, { func: isBoolean }],
-	bNotifyColors: ['Notify colors to other panels', false, { func: isBoolean }]
+	bNotifyColors: ['Notify colors to other panels', false, { func: isBoolean }],
+	bProcessNotVisible: ['Process panel while not visible', true, { func: isBoolean }]
 };
 Object.keys(properties).forEach(p => properties[p].push(properties[p][1]));
 setProperties(properties, '', 0); //This sets all the panel properties at once
@@ -332,51 +335,51 @@ if (properties.bAutoUpdateCheck[1]) {
 			background.updateImageBg();
 		}
 	};
-	['on_item_focus_change', 'on_selection_changed', 'on_playlists_changed', 'on_playlist_items_added', 'on_playlist_items_removed', 'on_playlist_switch'].forEach((e) => addEventListener(e, callback));
+	['on_item_focus_change', 'on_selection_changed', 'on_playlists_changed', 'on_playlist_items_added', 'on_playlist_items_removed', 'on_playlist_switch'].forEach((e) => addEventListener(e, callback, true, !properties.bProcessNotVisible[1]));
 
 	addEventListener('on_playback_stop', (reason) => {
 		if (reason !== 2) { // Invoked by user or Starting another track
 			if (background.useCover && background.coverModeOptions.bNowPlaying) { background.updateImageBg(); }
 		}
-	});
+	}, true, !properties.bProcessNotVisible[1]);
 
 	addEventListener('on_playback_new_track', () => {
 		if (background.useCover) { background.updateImageBg(); }
-	});
+	}, true, !properties.bProcessNotVisible[1]);
 
 	addEventListener('on_colours_changed', () => {
 		background.colorsChanged();
-	});
+	}, true, !properties.bProcessNotVisible[1]);
 }
 
 addEventListener('on_mouse_lbtn_down', (x, y) => {
 	slider.lbtn_down(x, y);
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_mouse_lbtn_up', (x, y) => {
 	slider.lbtn_up(x, y);
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_mouse_rbtn_up', (x, y) => {
 	if (utils.IsKeyPressed(VK_CONTROL) && utils.IsKeyPressed(VK_LWIN)) {
 		return onRbtnUpImportSettings.call(slider, properties).btn_up(x, y);
 	}
 	return createSliderMenu(slider, background, wheel, properties).btn_up(x, y);
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_mouse_lbtn_dblclk', (x, y) => {
 	slider.lbtn_dblclk(x, y);
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_mouse_move', (x, y, mask) => {
 	slider.move(x, y);
 	background.move(x, y, mask);
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_mouse_leave', () => {
 	slider.move(-1, -1);
 	background.leave();
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_mouse_wheel', (step) => {
 	if (utils.IsKeyPressed(VK_CONTROL) && utils.IsKeyPressed(VK_ALT) && slider.wheelResize(step)) {
@@ -387,36 +390,37 @@ addEventListener('on_mouse_wheel', (step) => {
 		}
 	} else if (utils.IsKeyPressed(VK_SHIFT)) { background.cycleArtAsync(step); }
 	else { slider.wheel(step); }
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_mouse_wheel_h', (s) => {
 	slider.wheel(s);
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_paint', (gr) => {
 	if (!window.ID) { return; }
 	if (!window.Width || !window.Height) { return; }
+	if (!properties.bProcessNotVisible[1]) { runDelayedEventListeners(); }
 	if (globSettings.bDebugPaint) { extendGR(gr, { Repaint: true, FillRoundRect: true }); }
 	else { extendGR(gr, { DrawRoundRect: true, FillRoundRect: true }); }
 	background.paint(gr);
 	slider.paint(gr);
 	if (window.highlight) { extendGR(gr, { Highlight: true }); }
 	if (window.debugPainting) { window.drawDebugRectAreas(gr); }
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_size', (width, height) => {
 	background.resize({ w: width, h: height, bPaint: false });
 	slider.resize();
 	slider.x = properties.offsetX[1] * width / 100;
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 addEventListener('on_volume_change', () => {
 	if (properties.mode[1] === 'volume') { slider.change(); }
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 {
 	const callback = () => { if (properties.mode[1] === 'seekbar') { slider.change(); } };
-	['on_playback_time', 'on_playback_pause', 'on_playback_seek', 'on_playback_new_track', 'on_playback_stop'].forEach((e) => addEventListener(e, callback));
+	['on_playback_time', 'on_playback_pause', 'on_playback_seek', 'on_playback_new_track', 'on_playback_stop'].forEach((e) => addEventListener(e, callback, true, !properties.bProcessNotVisible[1]));
 }
 
 addEventListener('on_notify_data', (name, info) => {
@@ -454,7 +458,7 @@ addEventListener('on_notify_data', (name, info) => {
 			break;
 		}
 	}
-});
+}, true, !properties.bProcessNotVisible[1]);
 
 if (properties.bOnNotifyColors[1]) { // Ask color-servers at init
 	setTimeout(() => {
