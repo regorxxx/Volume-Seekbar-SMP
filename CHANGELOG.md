@@ -2,6 +2,7 @@
 
 ## [Table of Contents]
 - [Unreleased](#unreleased)
+- [2.2.0](#220---2026-09-14
 - [2.1.0](#210---2026-08-24
 - [2.0.1](#201---2026-05-02
 - [2.0.0](#200---2026-04-28
@@ -14,6 +15,13 @@
 ## [Unreleased][]
 ### Added
 ### Changed
+### Removed
+### Fixed
+
+## [2.2.0] - 2026-09-14
+### Added
+### Changed
+- UI: support for D2D draw mode has been changed at the properties panel to ('- Draw mode: GDI (0), D2D (1)'). After script update, it will need to be set again if desired.
 - Helpers: updated helpers.
 ### Removed
 ### Fixed
@@ -131,7 +139,8 @@ Added mask files.
 
 ### Fixed
 
-[Unreleased]: ../../compare/v2.1.0...HEAD
+[Unreleased]: ../../compare/v2.2.0...HEAD
+[2.2.0]: ../../compare/v2.1.0...v2.2.0
 [2.1.0]: ../../compare/v2.0.1...v2.1.0
 [2.0.1]: ../../compare/v2.0.0...v2.0.1
 [2.0.0]: ../../compare/v1.3.0...v2.0.0

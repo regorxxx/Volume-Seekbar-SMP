@@ -1,10 +1,11 @@
 ﻿'use strict';
-//24/08/26
+//14/09/26
 
-if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.1.0' }); }
+if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.2.0' }); }
 
 // GDI/D2D draw mode
-window.DrawMode = Math.max(Math.min(window.GetProperty('Draw mode: GDI (0), D2D (1)', 0), 1), 0);
+if (typeof window.DrawMode !== 'undefined') { window.DrawMode = Math.max(Math.min(window.GetProperty('- Draw mode: GDI (0), D2D (1)', 0), 1), 0); }
+
 
 include('helpers\\helpers_xxx.js');
 /* global folders:readable, globSettings:readable, globProfiler:readable, VK_CONTROL:readable, VK_ALT:readable, VK_SHIFT:readable */
@@ -39,7 +40,7 @@ globProfiler.Print('helpers');
 checkCompatible();
 
 let properties = {
-	drawMode: ['Draw mode: GDI (0), D2D (1)', 0, { func: isInt, range: [[0,1]] }],
+	drawMode: ['- Draw mode: GDI (0), D2D (1)', 0, { func: isInt, range: [[0,1]] }],
 	colors: ['Colors', JSON.stringify({
 		background: RGB(50, 50, 50),
 		left: RGB(30, 70, 70),
