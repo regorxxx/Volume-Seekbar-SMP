@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 //20/03/25
 
 /* exported _wheel */

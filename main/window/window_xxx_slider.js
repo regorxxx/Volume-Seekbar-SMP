@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 //15/05/26
 
 /* exported _slider */

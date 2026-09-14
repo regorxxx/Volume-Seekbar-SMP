@@ -17,6 +17,7 @@
 - Helpers: updated helpers.
 ### Removed
 ### Fixed
+- Fixed UTF-8 script files without BOM not being properly recognized on windows.
 
 ## [2.1.0] - 2026-08-24
 ### Added
