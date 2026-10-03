@@ -16,6 +16,7 @@
 ### Added
 ### Changed
 - Helpers: updated helpers.
+- Helpers: replaced nircmd.exe with nircmdx.exe so all recycle bin errors are directly handled by console.
 ### Removed
 ### Fixed
 
