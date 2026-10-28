@@ -1,5 +1,5 @@
 ﻿'use strict';
-//14/09/26
+//27/10/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.2.0' }); }
 
@@ -39,7 +39,7 @@ globProfiler.Print('helpers');
 checkCompatible();
 
 let properties = {
-	drawMode: ['- Draw mode: GDI (0), D2D (1)', 0, { func: isInt, range: [[0,1]] }],
+	drawMode: ['- Draw mode: GDI (0), D2D (1)', 1, { func: isInt, range: [[0,1]] }],
 	colors: ['Colors', JSON.stringify({
 		background: RGB(50, 50, 50),
 		left: RGB(30, 70, 70),
