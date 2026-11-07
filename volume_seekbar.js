@@ -1,10 +1,10 @@
 ﻿'use strict';
-//27/10/26
+//06/11/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.2.0' }); }
 
 // GDI/D2D draw mode
-if (typeof window.DrawMode !== 'undefined') { window.DrawMode = Math.max(Math.min(window.GetProperty('- Draw mode: GDI (0), D2D (1)', 0), 1), 0); }
+if (typeof window.DrawMode !== 'undefined') { window.DrawMode = Math.max(Math.min(window.GetProperty('- Draw mode: GDI (0), D2D (1)', 1), 1), 0); }
 
 include('helpers\\helpers_xxx.js');
 /* global folders:readable, globSettings:readable, globProfiler:readable, VK_CONTROL:readable, VK_ALT:readable, VK_SHIFT:readable */
