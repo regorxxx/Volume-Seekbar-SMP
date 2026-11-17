@@ -1,5 +1,5 @@
 ﻿'use strict';
-//06/11/26
+//17/11/26
 
 if (!window.ScriptInfo.PackageId) { window.DefineScript('Volume-Seekbar-SMP', { author: 'regorxxx', version: '2.2.0' }); }
 
@@ -39,7 +39,7 @@ globProfiler.Print('helpers');
 checkCompatible();
 
 let properties = {
-	drawMode: ['- Draw mode: GDI (0), D2D (1)', 1, { func: isInt, range: [[0,1]] }],
+	drawMode: ['- Draw mode: GDI (0), D2D (1)', 1, { func: isInt, range: [[0, 1]] }],
 	colors: ['Colors', JSON.stringify({
 		background: RGB(50, 50, 50),
 		left: RGB(30, 70, 70),
@@ -427,7 +427,10 @@ addEventListener('on_notify_data', (name, info) => {
 	if (name === 'bio_imgChange' || name === 'bio_chkTrackRev' || name === 'xxx-scripts: panel name reply') { return; }
 	switch (name) { // NOSONAR
 		case window.ScriptInfo.Name + ': share UI settings': {
-			if (info) { slider.applyUiSettings(clone(info)); }
+			if (info) {
+				if (info.window && !info.window.includes(window.Name)) { break; }
+				slider.applyUiSettings(clone(info));
+			}
 			break;
 		}
 		case window.ScriptInfo.Name + ': set colors': { // Needs an array of 5 colors or an object {background, left, right, sel, buttons}
